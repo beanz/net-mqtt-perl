@@ -82,7 +82,8 @@ my $buf = '';
 my $mid = 1;
 my $next_ping;
 my $got_ping_response = 1;
-send_message($socket, message_type => MQTT_CONNECT);
+send_message($socket, message_type => MQTT_CONNECT,
+             keep_alive_timer => $keep_alive_timer);
 my $msg = read_message($socket, $buf) or die "No ConnAck\n";
 print 'Received: ', $msg->string, "\n" if ($verbose >= 2);
 send_message($socket, message_type => MQTT_SUBSCRIBE,
