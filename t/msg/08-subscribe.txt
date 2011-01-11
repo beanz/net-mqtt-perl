@@ -1,7 +1,6 @@
 $args =
 {
  message_type => MQTT_SUBSCRIBE,
- qos => MQTT_QOS_AT_LEAST_ONCE,
  message_id => 1,
  topics => [ [ 'testing' => MQTT_QOS_AT_MOST_ONCE ] ],
 }

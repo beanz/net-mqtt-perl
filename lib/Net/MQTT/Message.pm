@@ -59,9 +59,9 @@ or 0.  The default is 0.
 =item C<qos>
 
 The QoS field of the MQTT message.  This should be an integer between
-0 and 3 inclusive.  The default is 0 ("at most once").  The module
-L<Net::MQTT::Constants> provides constants that can be used for
-this value.
+0 and 3 inclusive.  The default is as specified in the spec or 0 ("at
+most once") otherwise.  The module L<Net::MQTT::Constants> provides
+constants that can be used for this value.
 
 =item C<retain>
 
@@ -142,7 +142,14 @@ can be used to convert this value to a human readable string.
 
 =cut
 
-sub qos { shift->{qos} || MQTT_QOS_AT_MOST_ONCE }
+sub qos {
+  my $self = shift;
+  defined $self->{qos} ? $self->{qos} : $self->_default_qos
+}
+
+sub _default_qos {
+  MQTT_QOS_AT_MOST_ONCE
+}
 
 =method C<retain()>
 
