@@ -134,7 +134,6 @@ sub read_message {
     my @handles = $select->can_read($timeout) or return;
     $timeout = $next_ping - Time::HiRes::time;
     foreach my $handle (@handles) {
-      print "H: $handle\n";
       if ($handle eq $socket) {
         my $bytes = sysread $socket, $_[0], 2048, length $_[0];
         unless ($bytes) {
