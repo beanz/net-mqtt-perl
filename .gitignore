@@ -1,0 +1,5 @@
+/Net-MQTT-*
+/.build
+*~
+/.tdldb.bak
+/temp
