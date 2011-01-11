@@ -102,7 +102,7 @@ sub packet {
     my $byte;
     ($byte, $proto, $src, $dst)  = unpack 'C x8 C x2 a4 a4', $ip;
     my $ip_ver = ($byte&0xf0) >> 4;
-    my $ip_len = $byte&0xf;
+    my $ip_len = ($byte&0xf) << 2;
     if ($ip_ver != 4) {
       warn " not IPv4\n";
       return;
