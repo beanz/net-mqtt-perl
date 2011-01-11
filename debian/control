@@ -10,5 +10,6 @@ Homepage: http://search.cpan.org/dist/Net-MQTT/
 Package: libnet-mqtt-perl
 Architecture: all
 Depends: ${perl:Depends}, ${misc:Depends}
+Suggests: libnet-pcap-perl
 Description: Net::MQTT Perl Module
  Blah blah blah
