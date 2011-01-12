@@ -4,6 +4,6 @@ $args =
  message_id => 1234,
 }
 
-60 02 04d2
+62 02 04d2
 
-PubRel/at-most-once 1234 
+PubRel/at-least-once 1234 
