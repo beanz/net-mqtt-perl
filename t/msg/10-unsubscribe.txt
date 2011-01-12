@@ -5,6 +5,6 @@ $args =
  topics => [ qw/testing/ ],
 }
 
-a0 0b 00 01  00 07 74 65    73 74 69 6e  67
+a2 0b 00 01  00 07 74 65    73 74 69 6e  67
 
-Unsubscribe/at-most-once 1 testing 
+Unsubscribe/at-least-once 1 testing 

@@ -23,6 +23,10 @@ sub message_type {
   10
 }
 
+sub _default_qos {
+  MQTT_QOS_AT_LEAST_ONCE
+}
+
 =method C<message_id()>
 
 Returns the message id field of the MQTT Unsubscribe message.

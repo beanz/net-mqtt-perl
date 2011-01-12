@@ -19,12 +19,12 @@ need to be instantiated directly.
 use base 'Net::MQTT::Message';
 use Net::MQTT::Constants qw/:all/;
 
-sub _default_qos {
-  MQTT_QOS_AT_LEAST_ONCE
-}
-
 sub message_type {
   8
+}
+
+sub _default_qos {
+  MQTT_QOS_AT_LEAST_ONCE
 }
 
 =method C<message_id()>
