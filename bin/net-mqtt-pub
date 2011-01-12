@@ -84,7 +84,7 @@ if (@ARGV) {
   $msg = join ' ', @ARGV;
   send_message($socket,
                message_type => MQTT_PUBLISH,
-               topic_name => $topic,
+               topic => $topic,
                message => $msg);
   #$msg = read_message($socket, $sock_buf) or die "No PubAck\n";
   #print 'Received: ', $msg->string, "\n" if ($verbose >= 2);
@@ -104,7 +104,7 @@ while (1) {
     } else {
       send_message($socket,
                    message_type => MQTT_PUBLISH,
-                   topic_name => $topic,
+                   topic => $topic,
                    message => $msg);
     }
   }

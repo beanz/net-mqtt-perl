@@ -1,7 +1,7 @@
 $args =
 {
  message_type => MQTT_PUBLISH,
- topic_name => 'testing',
+ topic => 'testing',
  message => 'test',
 }
 

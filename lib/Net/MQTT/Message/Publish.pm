@@ -23,13 +23,13 @@ sub message_type {
   3
 }
 
-=method C<topic_name()>
+=method C<topic()>
 
-Returns the topic_name field of the MQTT Publish message.
+Returns the topic field of the MQTT Publish message.
 
 =cut
 
-sub topic_name { shift->{topic_name} }
+sub topic { shift->{topic} }
 
 =method C<message_id()>
 
@@ -51,14 +51,14 @@ sub _message_string { shift->{message} }
 
 sub _remaining_string {
   my $self = shift;
-  $self->topic_name.
+  $self->topic.
     ($self->qos ? '/'.$self->message_id : '').
       ' '.dump_string($self->_message_string)
 }
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{topic_name} = decode_string($self->{remaining});
+  $self->{topic} = decode_string($self->{remaining});
   if ($self->qos) {
     $self->{message_id} = decode_short($self->{remaining});
   }
@@ -68,7 +68,7 @@ sub _parse_remaining {
 
 sub _remaining_bytes {
   my $self = shift;
-  my $o = encode_string($self->topic_name);
+  my $o = encode_string($self->topic);
   if ($self->qos) {
     $o .= encode_short($self->message_id);
   }

@@ -2,7 +2,7 @@ $args =
 {
  message_type => MQTT_PUBLISH,
  qos => MQTT_QOS_EXACTLY_ONCE,
- topic_name => 'testing',
+ topic => 'testing',
  message => 'test',
  message_id => 1,
  retain => 1,
