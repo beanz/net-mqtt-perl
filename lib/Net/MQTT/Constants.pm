@@ -14,11 +14,6 @@ Module to export constants for MQTT protocol.
 
 =cut
 
-use base 'Exporter';
-our %EXPORT_TAGS = ( 'all' => [ qw(                                 ) ] );
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
-our @EXPORT = qw();
-
 my %constants =
   (
    MQTT_CONNECT     => 0x1,
@@ -63,6 +58,7 @@ sub import {
               message_type_string
               dump_string
               connect_return_code_string
+              topic_to_regexp
              /) {
     *{$pkg.'::'.$_} = \&{$_};
   }
@@ -239,4 +235,22 @@ sub connect_return_code_string {
    'Connection Refused: bad user name or password',
    'Connection Refused: not authorized',
   ]->[$_[0]] || 'Reserved'
+}
+
+=head2 C<topic_to_regexp( $topic )>
+
+Takes a topic and returns a string if it has no wildcards or a regexp if
+it contains wild cards.
+
+=cut
+
+sub topic_to_regexp {
+  my $topic = shift;
+  my $c;
+  $c += ($topic =~ s!/\+!/[^/]*!g);
+  $c += ($topic =~ s!/#$!.*!);
+  $c += ($topic =~ s!^\+/![^/]*/!g);
+  $c += ($topic =~ s!^\+$![^/]*!g);
+  $c += ($topic =~ s!^#$!.*!);
+  $c ? qr/^$topic$/ : $topic;
 }
