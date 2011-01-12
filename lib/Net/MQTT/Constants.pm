@@ -239,8 +239,8 @@ sub connect_return_code_string {
 
 =head2 C<topic_to_regexp( $topic )>
 
-Takes a topic and returns a string if it has no wildcards or a regexp if
-it contains wild cards.
+Takes a topic and returns an equivalent regexp if it contains wild
+cards or undef if it doesn't contain wild cards.
 
 =cut
 
@@ -252,5 +252,8 @@ sub topic_to_regexp {
   $c += ($topic =~ s!^\+/![^/]*/!g);
   $c += ($topic =~ s!^\+$![^/]*!g);
   $c += ($topic =~ s!^#$!.*!);
-  $c ? qr/^$topic$/ : $topic;
+  unless ($c) {
+    return;
+  }
+  qr/^$topic$/
 }

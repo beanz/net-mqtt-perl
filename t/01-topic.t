@@ -13,7 +13,7 @@ my $topic;
 my $re;
 
 $topic = 'finance/stock/ibm/closingprice';
-is(topic_to_regexp($topic), 'finance/stock/ibm/closingprice', 'simple topic');
+is(topic_to_regexp($topic), undef, 'simple topic');
 
 $topic = 'finance/stock/ibm/#';
 $re = topic_to_regexp($topic);
