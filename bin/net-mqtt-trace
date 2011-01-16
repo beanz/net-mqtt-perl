@@ -61,12 +61,12 @@ further output.
 Print MQTT message information.  This option may be repeated to get
 further output.
 
-=item B<-count>
+=item B<-count NNN>
 
 Stop processing after the given number of packets.  The default is to
 process all packets.
 
-=item B<-snaplen>
+=item B<-snaplen NNN>
 
 Maximum length of data to capture for each packet.  Default is 65535.
 This is only used when capturing directly from a device.
@@ -76,7 +76,7 @@ This is only used when capturing directly from a device.
 Turn on promiscuous mode.  Default is off.  This is only used when
 capturing directly from a device.
 
-=item B<-timeout>
+=item B<-timeout NNN>
 
 The read timeout in milliseconds.  Default is 0 (no timeout).  This is
 only used when capturing directly from a device.

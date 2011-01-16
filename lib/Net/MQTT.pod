@@ -1,0 +1,30 @@
+use strict;
+use warnings;
+package Net::MQTT;
+
+# ABSTRACT: Perl modules for MQTT Protocol (http://mqtt.org/)
+
+=head1 SYNOPSIS
+
+  net-mqtt-sub /topic
+
+  net-mqtt-pub /topic message
+
+  net-mqtt-trace mqtt.tcp
+
+=head1 DESCRIPTION
+
+Low level API for the MQTT protocol described at L<http://mqtt.org>.
+
+=head1 DISCLAIMER
+
+This is not official IBM code.  I work for IBM but I'm writing this in
+my spare time (with permission).
+
+=head1 SEE ALSO
+
+net-mqtt-sub(1), net-mqtt-pub(1),  net-mqtt-trace(1), Net::MQTT::Message(3)
+
+=cut
+
+1;

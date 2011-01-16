@@ -30,7 +30,7 @@ Print the manual page.
 Include more verbose output.  Without this option the script only
 outputs errors
 
-=item B<-keepalive>
+=item B<-keepalive NNN>
 
 The keep alive timer value.  Defaults to 120 seconds.  For simplicity,
 it is also currently used as the connection timeout.
