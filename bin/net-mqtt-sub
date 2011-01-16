@@ -38,10 +38,19 @@ sent and received.
 With three B<-verbose> options, a hex dump of all data transmitted and
 received is printed.
 
-=item B<-keepalive>
+=item B<-keepalive NNN>
 
 The keep alive timer value.  Defaults to 120 seconds.  For simplicity,
 it is also currently used as the connection/subscription timeout.
+
+=item B<-count NNN>
+
+Read the specificed number of MQTT messages and then exit.  Default
+is 0 - read forever.
+
+=item B<-one> or B<-1>
+
+Short for B<-count 1>.  Read one message and exit.
 
 =back
 
@@ -64,10 +73,13 @@ use Pod::Usage;
 my $help;
 my $man;
 my $verbose = 0;
+my $count;
 my $keep_alive_timer = 120;
 GetOptions('help|?' => \$help,
            'man' => \$man,
            'verbose+' => \$verbose,
+           'count=i' => \$count,
+           'one|1' => sub { $count = 1 },
            'keepalive=i' => \$keep_alive_timer) or pod2usage(2);
 pod2usage(1) if ($help);
 pod2usage(-exitstatus => 0, -verbose => 2) if $man;
@@ -97,7 +109,7 @@ while (1) {
   if ($msg) {
     if ($msg->message_type == MQTT_PUBLISH) {
       if ($verbose == 0) {
-        print $msg->topic_name, " ", $msg->message, "\n";
+        print $msg->topic, " ", $msg->message, "\n";
       } else {
         print $msg->string, "\n";
       }
