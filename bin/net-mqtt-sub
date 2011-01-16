@@ -113,6 +113,9 @@ while (1) {
       } else {
         print $msg->string, "\n";
       }
+      if (defined $count && --$count == 0) {
+        exit;
+      }
     } elsif ($msg->message_type == MQTT_PINGRESP) {
       $got_ping_response = 1;
       print 'Received: ', $msg->string, "\n" if ($verbose >= 3);
