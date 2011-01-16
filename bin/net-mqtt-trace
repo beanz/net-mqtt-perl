@@ -14,8 +14,8 @@ use warnings;
   # batch decode
   # sniff 100 MQTT packets from eth0 and write them to mqtt.tcp
   # then later decode MQTT messages from tcpdump file
-  tcpdump -w xpl.tcp -i eth0 -c 100 -s 2048 udp and port 3865
-  net-mqtt-trace xpl.tcp
+  tcpdump -w mqtt.tcp -i eth0 -c 100 -s 4096 tcp and port 1883
+  net-mqtt-trace mqtt.tcp
 
 =head1 DESCRIPTION
 
