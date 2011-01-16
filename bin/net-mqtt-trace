@@ -7,6 +7,8 @@ use warnings;
 
 =head1 SYNOPSIS
 
+  net-mqtt-trace [options] {dev|dumpfile}
+
   # live decode
   # decode MQTT packets that are visible on the interface eth0
   net-mqtt-trace eth0
@@ -16,6 +18,70 @@ use warnings;
   # then later decode MQTT messages from tcpdump file
   tcpdump -w mqtt.tcp -i eth0 -c 100 -s 4096 tcp and port 1883
   net-mqtt-trace mqtt.tcp
+
+=head1 OPTIONS
+
+=over
+
+=item B<-help>
+
+Print a brief help message.
+
+=item B<-man>
+
+Print the manual page.
+
+=item B<-verbose>
+
+Include more verbose output.  By default, the start and end of
+processing produce a little output.  This option turns on further
+output including a summary of the counts of different packets decoded.
+
+=item B<-quiet>
+
+Remove even the basic verbose output.
+
+=item B<-link>
+
+Print link layer - assumed to be Ethernet - information.  This option
+may be repeated to get further output.
+
+=item B<-ip>
+
+Print ip layer information.  This option may be repeated to get
+further output.
+
+=item B<-tcp>
+
+Print TCP layer information.  This option may be repeated to get
+further output.
+
+=item B<-mqtt>
+
+Print MQTT message information.  This option may be repeated to get
+further output.
+
+=item B<-count>
+
+Stop processing after the given number of packets.  The default is to
+process all packets.
+
+=item B<-snaplen>
+
+Maximum length of data to capture for each packet.  Default is 65535.
+This is only used when capturing directly from a device.
+
+=item B<-promisc>
+
+Turn on promiscuous mode.  Default is off.  This is only used when
+capturing directly from a device.
+
+=item B<-timeout>
+
+The read timeout in milliseconds.  Default is 0 (no timeout).  This is
+only used when capturing directly from a device.
+
+=back
 
 =head1 DESCRIPTION
 
@@ -41,9 +107,9 @@ my $print_ip = 0;
 my $print_tcp = 0;
 my $print_mqtt = 1;
 my $count = -1;
-my $snaplen = 4096;
+my $snaplen = 65535;
 my $promisc = 0;
-my $timeout = 100;
+my $timeout = 0;
 my $help;
 my $man;
 GetOptions('help|?' => \$help,
@@ -98,13 +164,15 @@ printf STDERR
   if ($verbose);
 
 END {
-  print STDERR "Trace contained ", $glob->{count}->{total}, " packets\n"
-    if ($verbose);
-  if ($verbose>1) {
-    printf STDERR "%-10s %s\n", qw/Type Count/;
-    foreach (sort keys %{$glob->{count}}) {
-      next if ($_ eq 'total');
-      printf STDERR "%-10s %d\n", $_, $glob->{count}->{$_};
+  if (defined $glob->{count}->{total}) {
+    print STDERR "Trace contained ", $glob->{count}->{total}, " packets\n"
+      if ($verbose);
+    if ($verbose>1) {
+      printf STDERR "%-10s %s\n", qw/Type Count/;
+      foreach (sort keys %{$glob->{count}}) {
+        next if ($_ eq 'total');
+        printf STDERR "%-10s %d\n", $_, $glob->{count}->{$_};
+      }
     }
   }
 }
