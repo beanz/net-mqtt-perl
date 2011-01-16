@@ -99,7 +99,10 @@ default is 1.
 
 =cut
 
-sub clean_session { shift->{clean_session} || 1 }
+sub clean_session {
+  my $self = shift;
+  defined $self->{clean_session} ? $self->{clean_session} : 1
+}
 
 =method C<connect_reserved_flag()>
 
