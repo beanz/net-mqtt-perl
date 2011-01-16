@@ -26,22 +26,48 @@ batched processed by reading them from a tcpdump file.
 =cut
 
 use strict;
-use Net::Pcap;
-use Socket qw/inet_ntoa/;
+
 use Net::MQTT::Constants;
 use Net::MQTT::Message;
+use Net::Pcap;
 use Time::HiRes;
 
-my $err = "";
-my $dev = shift || die "@ARGV\n" ||Net::Pcap::lookupdev(\$err);
-$err and die 'lookupdev: '.$err;
+use Getopt::Long;
+use Pod::Usage;
+
+my $verbose = 1;
+my $print_link = 0;
+my $print_ip = 0;
+my $print_tcp = 0;
+my $print_mqtt = 1;
+my $count = -1;
 my $snaplen = 4096;
-my $promisc = 1;
+my $promisc = 0;
 my $timeout = 100;
+my $help;
+my $man;
+GetOptions('help|?' => \$help,
+           'man' => \$man,
+           'link+' => \$print_link,
+           'ip+' => \$print_ip,
+           'tcp+' => \$print_tcp,
+           'mqtt+' => \$print_mqtt,
+           'count=i' => \$count,
+           'snaplen=i' => \$snaplen,
+           'promisc!' => \$promisc,
+           'timeout=i' => \$timeout,
+           'quiet!' => sub { $verbose = 0 },
+           'verbose+' => \$verbose,
+          ) or pod2usage(2);
+pod2usage(1) if ($help);
+pod2usage(-exitstatus => 0, -verbose => 2) if $man;
+my $dev = shift || pod2usage(2);
+
 my $glob = {};
 $glob->{t} = Time::HiRes::time;
 
 my $pcap;
+my $err;
 if ($dev =~ /\.tcp$/) {
   # seems to be a file
   # assume the filter was provide to the tcpdump command
@@ -63,19 +89,23 @@ if ($dev =~ /\.tcp$/) {
 
   Net::Pcap::setfilter($pcap, $filter);
 }
-print STDERR "Processing $dev\n";
+print STDERR "Processing $dev\n" if ($verbose);
 
-Net::Pcap::loop($pcap, -1, \&packet, "");
+Net::Pcap::loop($pcap, $count, \&packet, "");
 Net::Pcap::close($pcap);
 printf STDERR
-  "Elapsed processing time: %.02f\n", Time::HiRes::time - $glob->{t};
+  "Elapsed processing time: %.02f\n", Time::HiRes::time - $glob->{t}
+  if ($verbose);
 
 END {
-  print STDERR "Trace contained ", $glob->{count}->{total}, " packets\n";
-  printf STDERR "%-10s %s\n", qw/Type Count/;
-  foreach (sort keys %{$glob->{count}}) {
-    next if ($_ eq 'total');
-    printf STDERR "%-10s %d\n", $_, $glob->{count}->{$_};
+  print STDERR "Trace contained ", $glob->{count}->{total}, " packets\n"
+    if ($verbose);
+  if ($verbose>1) {
+    printf STDERR "%-10s %s\n", qw/Type Count/;
+    foreach (sort keys %{$glob->{count}}) {
+      next if ($_ eq 'total');
+      printf STDERR "%-10s %d\n", $_, $glob->{count}->{$_};
+    }
   }
 }
 
@@ -89,12 +119,12 @@ sub packet {
   $glob->{count}->{total}++;
   printf(STDERR
          "Packet: %4d len=%-4d t=%-6.4f\n",
-         $glob->{count}->{total}, $hdr->{len}, $time);
+         $glob->{count}->{total}, $hdr->{len}, $time) if ($print_link);
 
   my ($mac_dst, $mac_src, $type, $ip) = unpack("a6 a6 n a*",$pkt);
 
-  0 and printf STDERR "Mac: %s %s 0x%04x\n",
-    (unpack 'H6', $mac_dst), (unpack 'H6', $mac_src), $type;
+  printf STDERR "Mac: %s %s 0x%04x\n",
+    (unpack 'H6', $mac_dst), (unpack 'H6', $mac_src), $type if ($print_link>1);
   my ($tcp, $proto, $src, $dst);
 
   if ($type == 0x0800) {
@@ -142,7 +172,7 @@ sub packet {
   my $dst_str = (unpack 'H*', $dst).':'.$dstp;
   $dst_str =~ s/^0+//;
   printf STDERR "TCP: src=%s dst=%s len=%d\n",
-    $src_str, $dst_str, length($payload);
+    $src_str, $dst_str, length($payload) if ($print_tcp);
 
   # filter should have been applied but just in case
   unless ($srcp == 1883 || $dstp == 1883) {
@@ -154,16 +184,16 @@ sub packet {
 
   my $saved = delete $glob->{save}->{$key};
   if (defined $saved) {
-    print STDERR "Restoring ", (unpack 'H*', $saved), "\n";
+    print STDERR "Restoring ", (unpack 'H*', $saved), "\n" if ($print_mqtt>2);
     $payload = $saved.$payload;
   }
 
-  print STDERR "Payload: ", (unpack 'H*', $payload), "\n";
+  print STDERR "Payload: ", (unpack 'H*', $payload), "\n" if ($print_mqtt>1);
 
   my $mqtt = Net::MQTT::Message->new_from_bytes($payload, 1);
   $glob->{save}->{$key} = $payload if (defined $payload && $payload ne '');
   return unless ($mqtt);
-  print "MQTT: ", $mqtt->string, "\n";
+  print "MQTT: ", $mqtt->string, "\n" if ($print_mqtt);
   $glob->{count}->{message_type_string($mqtt->message_type)}++;
 }
 
