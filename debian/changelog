@@ -1,5 +1,5 @@
-libnet-mqtt-perl (0.1-1) unstable; urgency=low
+libnet-mqtt-perl (1.110160-1) unstable; urgency=low
 
   * Initial release.
 
- -- Mark Hindess <soft-debian@temporalanomaly.com>  Tue, 11 Jan 2011 17:17:19 +0000
+ -- Mark Hindess <soft-debian@temporalanomaly.com>  Sun, 16 Jan 2011 11:08:12 +0000
