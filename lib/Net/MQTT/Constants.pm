@@ -171,7 +171,7 @@ string).
 =cut
 
 sub encode_string {
-  pack "n/a", $_[0];
+  pack "n/a*", $_[0];
 }
 
 =head2 C<qos_string( $qos_value )>

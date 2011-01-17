@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix pack syntax error.  Thanks to CPAN Testers.
 
 1.110160  2011-01-16 13:20:17 Europe/London
     - Initial release.
