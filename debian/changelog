@@ -2,7 +2,7 @@ libnet-mqtt-perl (1.110200-1) unstable; urgency=low
 
   * Minor improvements to sample scripts.
 
- -- Mark Hindess <soft-debian@temporalanomaly.com>  Thu, 20 Jan 2011 23:22:10 +0000
+ -- Mark Hindess <soft-debian@temporalanomaly.com>  Thu, 20 Jan 2011 23:13:32 +0000
 
 libnet-mqtt-perl (1.110170-1) unstable; urgency=low
 

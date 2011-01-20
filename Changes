@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+
+1.110200  2011-01-20 23:13:32 Europe/London
     - Minor improvements to sample scripts.
 
 1.110170  2011-01-17 19:58:17 Europe/London
