@@ -25,6 +25,14 @@ Print a brief help message.
 
 Print the manual page.
 
+=item B<-host>
+
+The host running the MQTT service.  The default is C<127.0.0.1>.
+
+=item B<-port>
+
+The port of the running MQTT service.  The default is 1883.
+
 =item B<-verbose>
 
 Include more verbose output.  Without this option the script only
@@ -56,17 +64,21 @@ use Pod::Usage;
 my $help;
 my $man;
 my $verbose = 0;
+my $host = '127.0.0.1';
+my $port = 1883;
 my $keep_alive_timer = 120;
 GetOptions('help|?' => \$help,
            'man' => \$man,
            'verbose+' => \$verbose,
+           'host=s' => \$host,
+           'port=i' => \$port,
            'keepalive=i' => \$keep_alive_timer) or pod2usage(2);
 pod2usage(1) if ($help);
 pod2usage(-exitstatus => 0, -verbose => 2) if $man;
 my $topic = shift || pod2usage(2); # need a topic
 
 my $socket =
-  IO::Socket::INET->new(PeerAddr =>'127.0.0.1:1883',
+  IO::Socket::INET->new(PeerAddr => $host.':'.$port,
                         Timeout => $keep_alive_timer,
                        ) or die "Socket connect failed: $!\n";
 
