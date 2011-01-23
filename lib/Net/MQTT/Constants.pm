@@ -14,6 +14,8 @@ Module to export constants for MQTT protocol.
 
 =cut
 
+use Carp qw/croak/;
+
 my %constants =
   (
    MQTT_CONNECT     => 0x1,
@@ -117,6 +119,7 @@ C<$data>.
 =cut
 
 sub decode_byte {
+  croak 'decode_byte: insufficient data' unless (length $_[0] >= 1);
   unpack 'C', substr $_[0], 0, 1, '';
 }
 
@@ -138,6 +141,7 @@ the start of C<$data>.
 =cut
 
 sub decode_short {
+  croak 'decode_short: insufficient data' unless (length $_[0] >= 2);
   unpack 'n', substr $_[0], 0, 2, '';
 }
 
@@ -160,6 +164,7 @@ it (and removing it) from the start of C<$data>.
 
 sub decode_string {
   my $len = decode_short($_[0]);
+  croak 'decode_string: insufficient data' unless (length $_[0] >= $len);
   substr $_[0], 0, $len, '';
 }
 

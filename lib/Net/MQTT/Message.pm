@@ -102,7 +102,11 @@ sub new_from_bytes {
   $p{dup} = ($b&0x8)>>3;
   $p{qos} = ($b&0x6)>>1;
   $p{retain} = ($b&0x1);
-  my ($length, $remaining_length_length) = decode_remaining_length($bytes);
+  my ($length, $remaining_length_length);
+  eval {
+    ($length, $remaining_length_length) = decode_remaining_length($bytes);
+  };
+  return if ($@);
   if (length $bytes < $length) {
     return
   }
