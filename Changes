@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Error checking when decoding short messages.
 
 1.110200  2011-01-20 23:13:32 Europe/London
     - Minor improvements to sample scripts.
