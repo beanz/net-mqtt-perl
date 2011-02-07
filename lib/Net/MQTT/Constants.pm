@@ -252,11 +252,12 @@ cards or undef if it doesn't contain wild cards.
 sub topic_to_regexp {
   my $topic = shift;
   my $c;
-  $c += ($topic =~ s!/\+!/[^/]*!g);
-  $c += ($topic =~ s!/#$!.*!);
-  $c += ($topic =~ s!^\+/![^/]*/!g);
-  $c += ($topic =~ s!^\+$![^/]*!g);
-  $c += ($topic =~ s!^#$!.*!);
+  $topic = quotemeta $topic;
+  $c += ($topic =~ s!\\/\\\+!\\/[^/]*!g);
+  $c += ($topic =~ s!\\/\\#$!.*!);
+  $c += ($topic =~ s!^\\\+\\/![^/]*\\/!g);
+  $c += ($topic =~ s!^\\\+$![^/]*!g);
+  $c += ($topic =~ s!^\\#$!.*!);
   unless ($c) {
     return;
   }
