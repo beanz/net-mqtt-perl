@@ -6,12 +6,12 @@ use warnings;
 use strict;
 $|=1;
 
-use Test::More tests => 13;
+use Test::More tests => 15;
 BEGIN { use_ok('Net::MQTT::Constants'); }
 use_ok('Net::MQTT::Message');
 
 my $mqtt = Net::MQTT::Message->new(message_type => 15,
-                                        remaining => ('X'x129));
+                                   remaining => ('X'x129));
 ok($mqtt, 'unknown long message');
 is($mqtt->string('  '),
    qq{  Reserved15/at-most-once \n}.
@@ -27,11 +27,19 @@ my $bytes = pack 'H*', '00';
 ok(!Net::MQTT::Message->new_from_bytes($bytes),
    'new_from_bytes - too short');
 
-$bytes .= pack 'H*', '8101';
+$bytes .= pack 'H*', '81';
 ok(!Net::MQTT::Message->new_from_bytes($bytes),
-   'new_from_bytes - still too short');
+   'new_from_bytes - still too short 1');
 
-$bytes .= ('X' x 129).'NEXTMESSAGE';
+$bytes .= pack 'H*', '01';
+ok(!Net::MQTT::Message->new_from_bytes($bytes),
+   'new_from_bytes - still too short 2');
+
+$bytes .= 'X';
+ok(!Net::MQTT::Message->new_from_bytes($bytes),
+   'new_from_bytes - still too short 3');
+
+$bytes .= ('X' x 128).'NEXTMESSAGE';
 $mqtt = Net::MQTT::Message->new_from_bytes($bytes, 1);
 ok($mqtt, 'new_from_bytes w/splice');
 is($bytes, 'NEXTMESSAGE', '... remaining bytes');

@@ -181,9 +181,10 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{protocol_name} = decode_string($self->{remaining});
-  $self->{protocol_version} = decode_byte($self->{remaining});
-  my $b = decode_byte($self->{remaining});
+  my $offset = 0;
+  $self->{protocol_name} = decode_string($self->{remaining}, \$offset);
+  $self->{protocol_version} = decode_byte($self->{remaining}, \$offset);
+  my $b = decode_byte($self->{remaining}, \$offset);
   $self->{user_name_flag} = ($b&0x80) >> 7;
   $self->{password_flag} = ($b&0x40) >> 6;
   $self->{will_retain} = ($b&0x20) >> 5;
@@ -191,16 +192,19 @@ sub _parse_remaining {
   $self->{will_flag} = ($b&0x4) >> 2;
   $self->{clean_session} = ($b&0x2) >> 1;
   $self->{connect_reserved_flag} = $b&0x1;
-  $self->{keep_alive_timer} = decode_short($self->{remaining});
-  $self->{client_id} = decode_string($self->{remaining});
-  $self->{will_topic} =
-    decode_string($self->{remaining}) if ($self->will_flag);
-  $self->{will_message} =
-    decode_string($self->{remaining}) if ($self->will_flag);
-  $self->{user_name} =
-    decode_string($self->{remaining}) if ($self->user_name_flag);
-  $self->{password} =
-    decode_string($self->{remaining}) if ($self->password_flag);
+  $self->{keep_alive_timer} = decode_short($self->{remaining}, \$offset);
+  $self->{client_id} = decode_string($self->{remaining}, \$offset);
+  if ($self->will_flag) {
+    $self->{will_topic} = decode_string($self->{remaining}, \$offset);
+    $self->{will_message} = decode_string($self->{remaining}, \$offset);
+  }
+  if ($self->user_name_flag) {
+    $self->{user_name} = decode_string($self->{remaining}, \$offset);
+  }
+  if ($self->password_flag) {
+    $self->{password} = decode_string($self->{remaining}, \$offset);
+  }
+  substr $self->{remaining}, 0, $offset, '';
 }
 
 sub _remaining_bytes {

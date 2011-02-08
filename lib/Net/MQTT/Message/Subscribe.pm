@@ -57,11 +57,13 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{message_id} = decode_short($self->{remaining});
-  while (length $self->{remaining}) {
-    push @{$self->{topics}}, [ decode_string($self->{remaining}),
-                               decode_byte($self->{remaining}) ];
+  my $offset = 0;
+  $self->{message_id} = decode_short($self->{remaining}, \$offset);
+  while ($offset < length $self->{remaining}) {
+    push @{$self->{topics}}, [ decode_string($self->{remaining}, \$offset),
+                               decode_byte($self->{remaining}, \$offset) ];
   }
+  substr $self->{remaining}, 0, $offset, '';
 }
 
 sub _remaining_bytes {

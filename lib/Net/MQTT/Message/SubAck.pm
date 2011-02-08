@@ -50,10 +50,12 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{message_id} = decode_short($self->{remaining});
-  while (length $self->{remaining}) {
-    push @{$self->{qos_levels}}, decode_byte($self->{remaining})&0x3;
+  my $offset = 0;
+  $self->{message_id} = decode_short($self->{remaining}, \$offset);
+  while ($offset < length $self->{remaining}) {
+    push @{$self->{qos_levels}}, decode_byte($self->{remaining}, \$offset)&0x3;
   }
+  substr $self->{remaining}, 0, $offset, '';
 }
 
 sub _remaining_bytes {

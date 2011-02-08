@@ -10,14 +10,15 @@ use Test::More tests => 7;
 BEGIN { use_ok('Net::MQTT::Constants'); }
 use_ok('Net::MQTT::Message');
 
-is(test_error(sub { decode_byte('') }),
+my $offset = 0;
+is(test_error(sub { decode_byte('', \$offset) }),
    'decode_byte: insufficient data', 'decode_byte error');
-is(test_error(sub { decode_short('1') }),
+is(test_error(sub { decode_short('1', \$offset) }),
    'decode_short: insufficient data', 'decode_short error');
-is(test_error(sub { decode_string(pack 'H*', '00') }),
+is(test_error(sub { decode_string((pack 'H*', '00'), \$offset) }),
    'decode_short: insufficient data',
    'decode_string error in short');
-is(test_error(sub { decode_string(pack 'H*', '000201') }),
+is(test_error(sub { decode_string((pack 'H*', '000201'), \$offset) }),
    'decode_string: insufficient data',
    'decode_string error in string');
 

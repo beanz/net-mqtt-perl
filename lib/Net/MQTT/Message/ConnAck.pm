@@ -51,8 +51,10 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{connack_reserved} = decode_byte($self->{remaining});
-  $self->{return_code} = decode_byte($self->{remaining});
+  my $offset = 0;
+  $self->{connack_reserved} = decode_byte($self->{remaining}, \$offset);
+  $self->{return_code} = decode_byte($self->{remaining}, \$offset);
+  substr $self->{remaining}, 0, $offset, '';
 }
 
 sub _remaining_bytes {

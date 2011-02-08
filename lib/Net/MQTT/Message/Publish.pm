@@ -58,11 +58,11 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{topic} = decode_string($self->{remaining});
-  if ($self->qos) {
-    $self->{message_id} = decode_short($self->{remaining});
-  }
-  $self->{message} = $self->{remaining};
+  my $offset = 0;
+  $self->{topic} = decode_string($self->{remaining}, \$offset);
+  $self->{message_id} = decode_short($self->{remaining}, \$offset)
+    if ($self->qos);
+  $self->{message} = substr $self->{remaining}, $offset;
   $self->{remaining} = '';
 }
 

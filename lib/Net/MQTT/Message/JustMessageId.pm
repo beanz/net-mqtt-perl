@@ -34,7 +34,9 @@ sub _remaining_string {
 
 sub _parse_remaining {
   my $self = shift;
-  $self->{message_id} = decode_short($self->{remaining});
+  my $offset = 0;
+  $self->{message_id} = decode_short($self->{remaining}, \$offset);
+  substr $self->{remaining}, 0, $offset, '';
 }
 
 sub _remaining_bytes {
