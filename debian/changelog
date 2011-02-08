@@ -1,3 +1,11 @@
+libnet-mqtt-perl (1.110390-1) unstable; urgency=low
+
+  * Fix inadvertent removal of header bytes when checking incomplete
+    messages.
+  * Error checking when decoding short messages.
+
+ -- Mark Hindess <soft-debian@temporalanomaly.com>  Tue,  8 Feb 2011 22:35:39 +0000
+
 libnet-mqtt-perl (1.110200-1) unstable; urgency=low
 
   * Minor improvements to sample scripts.
