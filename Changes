@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+
+1.110390  2011-02-08 22:33:18 Europe/London
     - Fix inadvertent removal of header bytes when checking incomplete
       messages.
     - Error checking when decoding short messages.
