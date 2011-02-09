@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix topic test to work on perl 5.8 and older.
 
 1.110390  2011-02-08 22:33:18 Europe/London
     - Fix inadvertent removal of header bytes when checking incomplete
