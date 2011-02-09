@@ -2,7 +2,7 @@ libnet-mqtt-perl (1.110400-1) unstable; urgency=low
 
   * Fix topic test to work on perl 5.8 and older.
 
- -- Mark Hindess <soft-debian@temporalanomaly.com>  Wed,  9 Feb 2011 17:58:41 +0000
+ -- Mark Hindess <soft-debian@temporalanomaly.com>  Wed,  9 Feb 2011 19:24:51 +0000
 
 libnet-mqtt-perl (1.110390-1) unstable; urgency=low
 
