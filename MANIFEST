@@ -65,4 +65,3 @@ t/release-pod-coverage.t
 t/release-pod-linkcheck.t
 t/release-pod-no404s.t
 t/release-pod-syntax.t
-t/release-synopsis.t
