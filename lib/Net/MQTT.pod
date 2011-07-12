@@ -20,11 +20,11 @@ version 1.111930
 
 =head1 SYNOPSIS
 
-  net-mqtt-sub /topic
+  # net-mqtt-sub /topic
 
-  net-mqtt-pub /topic message
+  # net-mqtt-pub /topic message
 
-  net-mqtt-trace mqtt.tcp
+  # net-mqtt-trace mqtt.tcp
 
 =head1 DESCRIPTION
 
