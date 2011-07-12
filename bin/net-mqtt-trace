@@ -5,91 +5,6 @@ use warnings;
 # ABSTRACT: Perl script for decoding MQTT messages from IP packets
 # PODNAME: net-mqtt-trace
 
-=head1 SYNOPSIS
-
-  net-mqtt-trace [options] {dev|dumpfile}
-
-  # live decode
-  # decode MQTT packets that are visible on the interface eth0
-  net-mqtt-trace eth0
-
-  # batch decode
-  # sniff 100 MQTT packets from eth0 and write them to mqtt.tcp
-  # then later decode MQTT messages from tcpdump file
-  tcpdump -w mqtt.tcp -i eth0 -c 100 -s 4096 tcp and port 1883
-  net-mqtt-trace mqtt.tcp
-
-=head1 OPTIONS
-
-=over
-
-=item B<-help>
-
-Print a brief help message.
-
-=item B<-man>
-
-Print the manual page.
-
-=item B<-verbose>
-
-Include more verbose output.  By default, the start and end of
-processing produce a little output.  This option turns on further
-output including a summary of the counts of different packets decoded.
-
-=item B<-quiet>
-
-Remove even the basic verbose output.
-
-=item B<-link>
-
-Print link layer - assumed to be Ethernet - information.  This option
-may be repeated to get further output.
-
-=item B<-ip>
-
-Print ip layer information.  This option may be repeated to get
-further output.
-
-=item B<-tcp>
-
-Print TCP layer information.  This option may be repeated to get
-further output.
-
-=item B<-mqtt>
-
-Print MQTT message information.  This option may be repeated to get
-further output.
-
-=item B<-count NNN>
-
-Stop processing after the given number of packets.  The default is to
-process all packets.
-
-=item B<-snaplen NNN>
-
-Maximum length of data to capture for each packet.  Default is 65535.
-This is only used when capturing directly from a device.
-
-=item B<-promisc>
-
-Turn on promiscuous mode.  Default is off.  This is only used when
-capturing directly from a device.
-
-=item B<-timeout NNN>
-
-The read timeout in milliseconds.  Default is 0 (no timeout).  This is
-only used when capturing directly from a device.
-
-=back
-
-=head1 DESCRIPTION
-
-This script is an MQTT message decoder for IP packets.  Packets can be
-decoded live by sniffing traffic on a network interface or they can be
-batched processed by reading them from a tcpdump file.
-
-=cut
 
 use strict;
 
@@ -265,8 +180,116 @@ sub packet {
   $glob->{count}->{message_type_string($mqtt->message_type)}++;
 }
 
+
+__END__
+=pod
+
+=head1 NAME
+
+net-mqtt-trace - Perl script for decoding MQTT messages from IP packets
+
+=head1 VERSION
+
+version 1.111930
+
+=head1 SYNOPSIS
+
+  net-mqtt-trace [options] {dev|dumpfile}
+
+  # live decode
+  # decode MQTT packets that are visible on the interface eth0
+  net-mqtt-trace eth0
+
+  # batch decode
+  # sniff 100 MQTT packets from eth0 and write them to mqtt.tcp
+  # then later decode MQTT messages from tcpdump file
+  tcpdump -w mqtt.tcp -i eth0 -c 100 -s 4096 tcp and port 1883
+  net-mqtt-trace mqtt.tcp
+
+=head1 DESCRIPTION
+
+This script is an MQTT message decoder for IP packets.  Packets can be
+decoded live by sniffing traffic on a network interface or they can be
+batched processed by reading them from a tcpdump file.
+
+=head1 OPTIONS
+
+=over
+
+=item B<-help>
+
+Print a brief help message.
+
+=item B<-man>
+
+Print the manual page.
+
+=item B<-verbose>
+
+Include more verbose output.  By default, the start and end of
+processing produce a little output.  This option turns on further
+output including a summary of the counts of different packets decoded.
+
+=item B<-quiet>
+
+Remove even the basic verbose output.
+
+=item B<-link>
+
+Print link layer - assumed to be Ethernet - information.  This option
+may be repeated to get further output.
+
+=item B<-ip>
+
+Print ip layer information.  This option may be repeated to get
+further output.
+
+=item B<-tcp>
+
+Print TCP layer information.  This option may be repeated to get
+further output.
+
+=item B<-mqtt>
+
+Print MQTT message information.  This option may be repeated to get
+further output.
+
+=item B<-count NNN>
+
+Stop processing after the given number of packets.  The default is to
+process all packets.
+
+=item B<-snaplen NNN>
+
+Maximum length of data to capture for each packet.  Default is 65535.
+This is only used when capturing directly from a device.
+
+=item B<-promisc>
+
+Turn on promiscuous mode.  Default is off.  This is only used when
+capturing directly from a device.
+
+=item B<-timeout NNN>
+
+The read timeout in milliseconds.  Default is 0 (no timeout).  This is
+only used when capturing directly from a device.
+
+=back
+
 =head1 SEE ALSO
 
 Net::MQTT::Message(3), Net::Pcap(3), tcpdump(8)
 
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 

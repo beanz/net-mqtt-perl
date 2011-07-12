@@ -1,0 +1,92 @@
+NAME
+    Net::MQTT::Message - Perl module to represent MQTT messages
+
+VERSION
+    version 1.111930
+
+SYNOPSIS
+      use Net::MQTT::Constants;
+      use Net::MQTT::Message;
+      my $mqtt = Net::MQTT::Message->new(message_type => MQTT_CONNECT);
+      print $socket $mqtt->bytes;
+
+      my $mqtt = Net::MQTT::Message->new_from_bytes($tcp_payload);
+      print 'Received: ', $mqtt->string, "\n";
+
+DESCRIPTION
+    This module encapsulates a single MQTT message. It uses subclasses to
+    represent specific message types.
+
+METHODS
+  "new( %parameters )"
+    Constructs an Net::MQTT::Message object based on the given parameters.
+    The common parameter keys are:
+
+    "message_type"
+        The message type field of the MQTT message. This should be an
+        integer between 0 and 15 inclusive. The module Net::MQTT::Constants
+        provides constants that can be used for this value. This parameter
+        is required.
+
+    "dup"
+        The duplicate flag field of the MQTT message. This should be either
+        1 or 0. The default is 0.
+
+    "qos"
+        The QoS field of the MQTT message. This should be an integer between
+        0 and 3 inclusive. The default is as specified in the spec or 0 ("at
+        most once") otherwise. The module Net::MQTT::Constants provides
+        constants that can be used for this value.
+
+    "retain"
+        The retain flag field of the MQTT message. This should be either 1
+        or 0. The default is 0.
+
+    The remaining keys are dependent on the specific message type. The
+    documentation for the subclasses for each message type list methods with
+    the same name as the required keys.
+
+  "new_from_bytes( $packed_bytes, [ $splice ] )"
+    Attempts to constructs an Net::MQTT::Message object based on the given
+    packed byte string. If there are insufficient bytes, then undef is
+    returned. If the splice parameter is provided and true, then the
+    processed bytes are removed from the scalar referenced by the
+    $packed_bytes parameter.
+
+  "message_type()"
+    Returns the message type field of the MQTT message. The module
+    Net::MQTT::Constants provides a function, "message_type_string", that
+    can be used to convert this value to a human readable string.
+
+  "dup()"
+    The duplicate flag field of the MQTT message.
+
+  "qos()"
+    The QoS field of the MQTT message. The module Net::MQTT::Constants
+    provides a function, "qos_string", that can be used to convert this
+    value to a human readable string.
+
+  "retain()"
+    The retain field of the MQTT message.
+
+  "remaining()"
+    This contains a packed string of bytes with any of the payload of the
+    MQTT message that was not parsed by these modules. This should not be
+    required for packets that strictly follow the standard.
+
+  "string([ $prefix ])"
+    Returns a summary of the message as a string suitable for logging. If
+    provided, each line will be prefixed by the optional prefix.
+
+  "bytes()"
+    Returns the bytes of the message suitable for writing to a socket.
+
+AUTHOR
+    Mark Hindess <soft-cpan@temporalanomaly.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2011 by Mark Hindess.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+

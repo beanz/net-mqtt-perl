@@ -1,20 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::ConnAck;
+BEGIN {
+  $Net::MQTT::Message::ConnAck::VERSION = '1.111930';
+}
 
 # ABSTRACT: Perl module to represent an MQTT ConnAck message
 
-=head1 SYNOPSIS
-
-  # instantiated by Net::MQTT::Message
-
-=head1 DESCRIPTION
-
-This module encapsulates a single MQTT Connection Acknowledgement
-message.  It is a specific subclass used by L<Net::MQTT::Message>
-and should not need to be instantiated directly.
-
-=cut
 
 use base 'Net::MQTT::Message';
 use Net::MQTT::Constants qw/:all/;
@@ -23,23 +15,9 @@ sub message_type {
   2
 }
 
-=method C<connack_reserved()>
-
-Returns the reserved field of the MQTT Connection Acknowledgement
-message.
-
-=cut
 
 sub connack_reserved { shift->{connack_reserved} || 0 }
 
-=method C<return_code()>
-
-Returns the return code field of the MQTT Connection Acknowledgement
-message.  The module L<Net::MQTT::Constants> provides a function,
-C<connect_return_code_string>, that can be used to convert this value
-to a human readable string.
-
-=cut
 
 sub return_code { shift->{return_code} || MQTT_CONNECT_ACCEPTED }
 
@@ -64,3 +42,52 @@ sub _remaining_bytes {
 }
 
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message::ConnAck - Perl module to represent an MQTT ConnAck message
+
+=head1 VERSION
+
+version 1.111930
+
+=head1 SYNOPSIS
+
+  # instantiated by Net::MQTT::Message
+
+=head1 DESCRIPTION
+
+This module encapsulates a single MQTT Connection Acknowledgement
+message.  It is a specific subclass used by L<Net::MQTT::Message>
+and should not need to be instantiated directly.
+
+=head1 METHODS
+
+=head2 C<connack_reserved()>
+
+Returns the reserved field of the MQTT Connection Acknowledgement
+message.
+
+=head2 C<return_code()>
+
+Returns the return code field of the MQTT Connection Acknowledgement
+message.  The module L<Net::MQTT::Constants> provides a function,
+C<connect_return_code_string>, that can be used to convert this value
+to a human readable string.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

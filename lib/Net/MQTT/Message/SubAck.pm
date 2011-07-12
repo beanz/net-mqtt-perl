@@ -1,20 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::SubAck;
+BEGIN {
+  $Net::MQTT::Message::SubAck::VERSION = '1.111930';
+}
 
 # ABSTRACT: Perl module to represent an MQTT SubAck message
 
-=head1 SYNOPSIS
-
-  # instantiated by Net::MQTT::Message
-
-=head1 DESCRIPTION
-
-This module encapsulates a single MQTT Subscription Acknowledgement
-message.  It is a specific subclass used by L<Net::MQTT::Message>
-and should not need to be instantiated directly.
-
-=cut
 
 use base 'Net::MQTT::Message';
 use Net::MQTT::Constants qw/:all/;
@@ -23,21 +15,9 @@ sub message_type {
   9
 }
 
-=method C<message_id()>
-
-Returns the message id field of the MQTT Subscription Acknowledgement
-message.
-
-=cut
 
 sub message_id { shift->{message_id} }
 
-=method C<qos_levels()>
-
-Returns the list of granted QoS fields of the MQTT Subscription
-Acknowledgement message.
-
-=cut
 
 sub qos_levels { shift->{qos_levels} }
 
@@ -69,3 +49,50 @@ sub _remaining_bytes {
 
 
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message::SubAck - Perl module to represent an MQTT SubAck message
+
+=head1 VERSION
+
+version 1.111930
+
+=head1 SYNOPSIS
+
+  # instantiated by Net::MQTT::Message
+
+=head1 DESCRIPTION
+
+This module encapsulates a single MQTT Subscription Acknowledgement
+message.  It is a specific subclass used by L<Net::MQTT::Message>
+and should not need to be instantiated directly.
+
+=head1 METHODS
+
+=head2 C<message_id()>
+
+Returns the message id field of the MQTT Subscription Acknowledgement
+message.
+
+=head2 C<qos_levels()>
+
+Returns the list of granted QoS fields of the MQTT Subscription
+Acknowledgement message.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
