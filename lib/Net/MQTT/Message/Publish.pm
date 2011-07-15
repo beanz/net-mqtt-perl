@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Message::Publish;
 BEGIN {
-  $Net::MQTT::Message::Publish::VERSION = '1.111930';
+  $Net::MQTT::Message::Publish::VERSION = '1.111960';
 }
 
 # ABSTRACT: Perl module to represent an MQTT Publish message
@@ -64,7 +64,7 @@ Net::MQTT::Message::Publish - Perl module to represent an MQTT Publish message
 
 =head1 VERSION
 
-version 1.111930
+version 1.111960
 
 =head1 SYNOPSIS
 
