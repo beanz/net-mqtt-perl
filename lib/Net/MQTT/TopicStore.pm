@@ -37,11 +37,11 @@ Adds the topic pattern to the store.
 =cut
 
 sub add {
-  my ($self, $topic, $value) = @_;
-  unless (exists $self->{topics}->{$topic}) {
-    $self->{topics}->{$topic} = _topic_to_regexp($topic);
+  my ($self, $topic_pattern) = @_;
+  unless (exists $self->{topics}->{$topic_pattern}) {
+    $self->{topics}->{$topic_pattern} = _topic_to_regexp($topic_pattern);
   }
-  $topic
+  $topic_pattern
 }
 
 =method C<delete( $topic_pattern )>
