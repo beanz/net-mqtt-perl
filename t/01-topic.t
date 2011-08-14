@@ -6,7 +6,7 @@ use warnings;
 use strict;
 $|=1;
 
-use Test::More tests => 27;
+use Test::More tests => 31;
 BEGIN { use_ok('Net::MQTT::TopicStore'); }
 
 my $topic_store;
@@ -40,6 +40,17 @@ foreach my $topic_name (qw!finance/stock/ibm finance/stock/xyz!) {
                 '... matches '.$topic_name);
 }
 foreach my $topic_name (qw!finance/stock/ibm/closingprice!) {
+  check_matches($topic_store, $topic_name, '',
+                '... doesn\'t matches '.$topic_name);
+}
+
+ok($topic_store = Net::MQTT::TopicStore->new('finance/+/ibm'),
+   'topic finance/+/ibm');
+foreach my $topic_name (qw!finance/stock/ibm!) {
+  check_matches($topic_store, $topic_name, 'finance/+/ibm',
+                '... matches '.$topic_name);
+}
+foreach my $topic_name (qw!finance/stock/xyz finance/stock/ibm/closingprice!) {
   check_matches($topic_store, $topic_name, '',
                 '... doesn\'t matches '.$topic_name);
 }
