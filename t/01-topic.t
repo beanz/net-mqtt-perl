@@ -55,22 +55,22 @@ foreach my $topic_name (qw!finance/stock/xyz finance/stock/ibm/closingprice!) {
                 '... doesn\'t matches '.$topic_name);
 }
 
-ok($topic_store = Net::MQTT::TopicStore->new('+/+'), 'topic +/+'),
+ok($topic_store = Net::MQTT::TopicStore->new('+/+'), 'topic +/+');
 ok($topic_store->add('/+'), '... add /+');
 check_matches($topic_store, '/finance', '+/+, /+',
                 '... matches /finance');
 
-ok($topic_store = Net::MQTT::TopicStore->new('+'), 'topic +'),
+ok($topic_store = Net::MQTT::TopicStore->new('+'), 'topic +');
 check_matches($topic_store, '/finance', '', '... doesn\'t match /finance');
 
-ok($topic_store = Net::MQTT::TopicStore->new('$SYS/#'), 'topic $SYS/#'),
+ok($topic_store = Net::MQTT::TopicStore->new('$SYS/#'), 'topic $SYS/#');
 check_matches($topic_store, '$SYS/test', '$SYS/#', '... matches $SYS/test');
 
-ok($topic_store = Net::MQTT::TopicStore->new('/#'), 'topic /#'),
+ok($topic_store = Net::MQTT::TopicStore->new('/#'), 'topic /#');
 check_matches($topic_store, '/test', '/#', '... matches /test');
 check_matches($topic_store, 'test', '', '... doesn\'t match test');
 
-ok($topic_store = Net::MQTT::TopicStore->new('#'), 'topic #'),
+ok($topic_store = Net::MQTT::TopicStore->new('#'), 'topic #');
 check_matches($topic_store, '/test', '#', '... matches /test');
 check_matches($topic_store, 'test', '#', '... matches test');
 
