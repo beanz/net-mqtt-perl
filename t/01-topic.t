@@ -6,53 +6,65 @@ use warnings;
 use strict;
 $|=1;
 
-use Test::More tests => 18;
-BEGIN { use_ok('Net::MQTT::Constants'); }
+use Test::More tests => 27;
+BEGIN { use_ok('Net::MQTT::TopicStore'); }
 
-my $topic;
-my $re;
-my $sep = '\\/';
+my $topic_store;
+ok($topic_store = Net::MQTT::TopicStore->new, 'topic store');
+ok($topic_store->add('finance/stock/ibm/closingprice'),
+   '... add finance/stock/ibm/closingprice');
+check_matches($topic_store,
+              'finance/stock/ibm/closingprice',
+              'finance/stock/ibm/closingprice',
+              'simple topic');
 
-$topic = 'finance/stock/ibm/closingprice';
-is(topic_to_regexp($topic), undef, 'simple topic');
-
-$topic = 'finance/stock/ibm/#';
-$re = topic_to_regexp($topic);
-is($re, qr!^finance${sep}stock${sep}ibm.*$!, 'multi-level wildcard '.$topic);
+ok($topic_store = Net::MQTT::TopicStore->new('finance/stock/ibm/#'),
+   'topic finance/stock/ibm/#');
 
 foreach my $topic_name (qw!finance/stock/ibm
                            finance/stock/ibm/closingprice
                            finance/stock/ibm/currentprice!) {
-  ok($topic_name =~ $re, '... matches '.$topic_name);
+  check_matches($topic_store, $topic_name, 'finance/stock/ibm/#',
+                '... matches '.$topic_name);
 }
 
-$topic = 'finance/stock/+';
-$re = topic_to_regexp($topic);
-is($re, qr!^finance${sep}stock${sep}[^/]*$!, 'single-level wildcard '.$topic);
+foreach my $topic_name (qw!finance/stock/ibmblah finance/stock/ibmblah/1/2/3!) {
+  check_matches($topic_store, $topic_name, '',
+                '... doesn\'t matches '.$topic_name);
+}
 
+ok($topic_store = Net::MQTT::TopicStore->new('finance/stock/+'),
+   'topic finance/stock/+');
 foreach my $topic_name (qw!finance/stock/ibm finance/stock/xyz!) {
-  ok($topic_name =~ $re, '... matches '.$topic_name);
+  check_matches($topic_store, $topic_name, 'finance/stock/+',
+                '... matches '.$topic_name);
 }
 foreach my $topic_name (qw!finance/stock/ibm/closingprice!) {
-  ok($topic_name !~ $re, '... doesn\'t match '.$topic_name);
+  check_matches($topic_store, $topic_name, '',
+                '... doesn\'t matches '.$topic_name);
 }
 
-$topic = '+/+';
-$re = topic_to_regexp($topic);
-is($re, qr!^[^/]*${sep}[^/]*$!, 'single-level wildcard '.$topic);
-ok('/finance' =~ $re, '... matches /finance');
+ok($topic_store = Net::MQTT::TopicStore->new('+/+'), 'topic +/+'),
+ok($topic_store->add('/+'), '... add /+');
+check_matches($topic_store, '/finance', '+/+, /+',
+                '... matches /finance');
 
-$topic = '/+';
-$re = topic_to_regexp($topic);
-is($re, qr!^${sep}[^/]*$!, 'single-level wildcard '.$topic);
-ok('/finance' =~ $re, '... matches /finance');
+ok($topic_store = Net::MQTT::TopicStore->new('+'), 'topic +'),
+check_matches($topic_store, '/finance', '', '... doesn\'t match /finance');
 
-$topic = '+';
-$re = topic_to_regexp($topic);
-is($re, qr!^[^/]*$!, 'single-level wildcard '.$topic);
-ok('/finance' !~ $re, '... doesn\'t match /finance');
+ok($topic_store = Net::MQTT::TopicStore->new('$SYS/#'), 'topic $SYS/#'),
+check_matches($topic_store, '$SYS/test', '$SYS/#', '... matches $SYS/test');
 
-$topic = '$SYS/#';
-$re = topic_to_regexp($topic);
-is($re, qr!^\$SYS.*$!, 'single-level wildcard '.$topic);
-ok('$SYS/test' =~ $re, '... matches $SYS/test');
+ok($topic_store = Net::MQTT::TopicStore->new('/#'), 'topic /#'),
+check_matches($topic_store, '/test', '/#', '... matches /test');
+check_matches($topic_store, 'test', '', '... doesn\'t match test');
+
+ok($topic_store = Net::MQTT::TopicStore->new('#'), 'topic #'),
+check_matches($topic_store, '/test', '#', '... matches /test');
+check_matches($topic_store, 'test', '#', '... matches test');
+
+sub check_matches {
+  my ($store, $topic, $expect, $desc) = @_;
+  my $matches = $store->values($topic);
+  is((join ', ', @{$matches||[]}), $expect, $desc);
+}

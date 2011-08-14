@@ -60,7 +60,6 @@ sub import {
               message_type_string
               dump_string
               connect_return_code_string
-              topic_to_regexp
              /) {
     *{$pkg.'::'.$_} = \&{$_};
   }
@@ -254,26 +253,4 @@ sub connect_return_code_string {
    'Connection Refused: bad user name or password',
    'Connection Refused: not authorized',
   ]->[$_[0]] || 'Reserved'
-}
-
-=head2 C<topic_to_regexp( $topic )>
-
-Takes a topic and returns an equivalent regexp if it contains wild
-cards or undef if it doesn't contain wild cards.
-
-=cut
-
-sub topic_to_regexp {
-  my $topic = shift;
-  my $c;
-  $topic = quotemeta $topic;
-  $c += ($topic =~ s!\\/\\\+!\\/[^/]*!g);
-  $c += ($topic =~ s!\\/\\#$!.*!);
-  $c += ($topic =~ s!^\\\+\\/![^/]*\\/!g);
-  $c += ($topic =~ s!^\\\+$![^/]*!g);
-  $c += ($topic =~ s!^\\#$!.*!);
-  unless ($c) {
-    return;
-  }
-  qr/^$topic$/
 }
