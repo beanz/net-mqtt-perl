@@ -1,3 +1,9 @@
+libnet-mqtt-perl (1.112320-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Mark Hindess <soft-debian@temporalanomaly.com>  Sat, 20 Aug 2011 22:43:04 +0100
+
 libnet-mqtt-perl (1.110400-1) unstable; urgency=low
 
   * Fix topic test to work on perl 5.8 and older.
