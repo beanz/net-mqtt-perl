@@ -1,20 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
+BEGIN {
+  $Net::MQTT::Message::Connect::VERSION = '1.112320';
+}
 
 # ABSTRACT: Perl module to represent an MQTT Connect message
 
-=head1 SYNOPSIS
-
-  # instantiated by Net::MQTT::Message
-
-=head1 DESCRIPTION
-
-This module encapsulates a single MQTT Connection Request message.  It
-is a specific subclass used by L<Net::MQTT::Message> and should
-not need to be instantiated directly.
-
-=cut
 
 use base 'Net::MQTT::Message';
 use Net::MQTT::Constants qw/:all/;
@@ -23,148 +15,57 @@ sub message_type {
   1
 }
 
-=method C<protocol_name()>
-
-Returns the protocol name field of the MQTT Connect message.  The
-default is 'C<MQIsdp>'.
-
-=cut
 
 sub protocol_name { shift->{protocol_name} || 'MQIsdp' }
 
-=method C<protocol_version()>
-
-Returns the protocol version field of the MQTT Connect message.  The
-default is 3.
-
-=cut
 
 sub protocol_version { shift->{protocol_version} || 3 }
 
-=method C<user_name_flag()>
-
-Returns the user name flag field of the MQTT Connect message.  The
-default is true if and only if a user name is defined.
-
-=cut
 
 sub user_name_flag {
   my $self = shift;
   $self->{user_name_flag} || defined $self->{user_name};
 }
 
-=method C<password_flag()>
-
-Returns the password flag field of the MQTT Connect message.  The
-default is true if and only if a user name is defined.
-
-=cut
 
 sub password_flag {
   my $self = shift;
   $self->{password_flag} || defined $self->{password};
 }
 
-=method C<will_retain()>
-
-Returns the will retain field of the MQTT Connect message.  The
-default is 0.
-
-=cut
 
 sub will_retain { shift->{will_retain} || 0 }
 
-=method C<will_qos()>
-
-Returns the will QoS field of the MQTT Connect message.  The default
-is 0.
-
-=cut
 
 sub will_qos { shift->{will_qos} || 0 }
 
-=method C<will_flag()>
-
-Returns the will flag field of the MQTT Connect message.  The default
-is 0.
-
-=cut
 
 sub will_flag { shift->{will_flag} || 0 }
 
-=method C<clean_session()>
-
-Returns the clean session flag field of the MQTT Connect message.  The
-default is 1.
-
-=cut
 
 sub clean_session {
   my $self = shift;
   defined $self->{clean_session} ? $self->{clean_session} : 1
 }
 
-=method C<connect_reserved_flag()>
-
-Returns the reserved flag field of the MQTT Connect message.  The
-default is 0.
-
-=cut
 
 sub connect_reserved_flag { shift->{connect_reserved_flag} || 0 }
 
-=method C<keep_alive_timer()>
-
-Returns the keep alive timer field of the MQTT Connect message.  The
-units are seconds.  The default is 60.
-
-=cut
 
 sub keep_alive_timer { shift->{keep_alive_timer} || 60 }
 
-=method C<client_id()>
-
-Returns the client identifier field of the MQTT Connect message.  The
-default is 'C<Net::MQTT::Message[$$]>' where 'C<$$>' is the
-current process id.
-
-=cut
 
 sub client_id { shift->{client_id} || 'Net::MQTT::Message['.$$.']' }
 
-=method C<will_topic()>
-
-Returns the will topic field of the MQTT Connect message.  The default
-is undefined.
-
-=cut
 
 sub will_topic { shift->{will_topic} }
 
-=method C<will_message()>
-
-Returns the will message field of the MQTT Connect message.  The
-default is undefined.
-
-=cut
 
 sub will_message { shift->{will_message} }
 
-=method C<user_name()>
-
-Returns the user name field of the MQTT Connect message.  The default
-is undefined.
-
-=cut
 
 sub user_name { shift->{user_name} }
 
-=method C<password()>
-
-Returns the password field of the MQTT Connect message.  The default
-is undefined.
-
-=cut
 
 sub password { shift->{password} }
 
@@ -228,3 +129,116 @@ sub _remaining_bytes {
 }
 
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
+
+=head1 VERSION
+
+version 1.112320
+
+=head1 SYNOPSIS
+
+  # instantiated by Net::MQTT::Message
+
+=head1 DESCRIPTION
+
+This module encapsulates a single MQTT Connection Request message.  It
+is a specific subclass used by L<Net::MQTT::Message> and should
+not need to be instantiated directly.
+
+=head1 METHODS
+
+=head2 C<protocol_name()>
+
+Returns the protocol name field of the MQTT Connect message.  The
+default is 'C<MQIsdp>'.
+
+=head2 C<protocol_version()>
+
+Returns the protocol version field of the MQTT Connect message.  The
+default is 3.
+
+=head2 C<user_name_flag()>
+
+Returns the user name flag field of the MQTT Connect message.  The
+default is true if and only if a user name is defined.
+
+=head2 C<password_flag()>
+
+Returns the password flag field of the MQTT Connect message.  The
+default is true if and only if a user name is defined.
+
+=head2 C<will_retain()>
+
+Returns the will retain field of the MQTT Connect message.  The
+default is 0.
+
+=head2 C<will_qos()>
+
+Returns the will QoS field of the MQTT Connect message.  The default
+is 0.
+
+=head2 C<will_flag()>
+
+Returns the will flag field of the MQTT Connect message.  The default
+is 0.
+
+=head2 C<clean_session()>
+
+Returns the clean session flag field of the MQTT Connect message.  The
+default is 1.
+
+=head2 C<connect_reserved_flag()>
+
+Returns the reserved flag field of the MQTT Connect message.  The
+default is 0.
+
+=head2 C<keep_alive_timer()>
+
+Returns the keep alive timer field of the MQTT Connect message.  The
+units are seconds.  The default is 60.
+
+=head2 C<client_id()>
+
+Returns the client identifier field of the MQTT Connect message.  The
+default is 'C<Net::MQTT::Message[$$]>' where 'C<$$>' is the
+current process id.
+
+=head2 C<will_topic()>
+
+Returns the will topic field of the MQTT Connect message.  The default
+is undefined.
+
+=head2 C<will_message()>
+
+Returns the will message field of the MQTT Connect message.  The
+default is undefined.
+
+=head2 C<user_name()>
+
+Returns the user name field of the MQTT Connect message.  The default
+is undefined.
+
+=head2 C<password()>
+
+Returns the password field of the MQTT Connect message.  The default
+is undefined.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

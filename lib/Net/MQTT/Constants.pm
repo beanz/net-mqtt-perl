@@ -1,18 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::Constants;
+BEGIN {
+  $Net::MQTT::Constants::VERSION = '1.112320';
+}
 
 # ABSTRACT: Module to export constants for MQTT protocol
 
-=head1 SYNOPSIS
-
-  use Net::MQTT::Constants;
-
-=head1 DESCRIPTION
-
-Module to export constants for MQTT protocol.
-
-=cut
 
 use Carp qw/croak/;
 
@@ -65,15 +59,6 @@ sub import {
   }
 }
 
-=head1 C<FUNCTIONS>
-
-=head2 C<decode_remaining_length( $data, \$offset )>
-
-Calculates the C<remaining length> from the bytes in C<$data> starting
-at the offset read from the scalar reference.  The offset reference is
-subsequently incremented by the number of bytes processed.
-
-=cut
 
 sub decode_remaining_length {
   my ($data, $offset) = @_;
@@ -88,12 +73,6 @@ sub decode_remaining_length {
   $v
 }
 
-=head2 C<encode_remaining_length( $length )>
-
-Calculates the C<remaining length> bytes from the length, C<$length>,
-and returns the packed bytes as a string.
-
-=cut
 
 sub encode_remaining_length {
   my $v = shift;
@@ -110,13 +89,6 @@ sub encode_remaining_length {
   $o;
 }
 
-=head2 C<decode_byte( $data, \$offset )>
-
-Returns a byte by unpacking it from C<$data> starting at the offset
-read from the scalar reference.  The offset reference is subsequently
-incremented by the number of bytes processed.
-
-=cut
 
 sub decode_byte {
   my ($data, $offset) = @_;
@@ -126,23 +98,11 @@ sub decode_byte {
   $res
 }
 
-=head2 C<encode_byte( $byte )>
-
-Returns a packed byte.
-
-=cut
 
 sub encode_byte {
   pack 'C', $_[0];
 }
 
-=head2 C<decode_short( $data, \$offset )>
-
-Returns a short (two bytes) by unpacking it from C<$data> starting at
-the offset read from the scalar reference.  The offset reference is
-subsequently incremented by the number of bytes processed.
-
-=cut
 
 sub decode_short {
   my ($data, $offset) = @_;
@@ -152,24 +112,11 @@ sub decode_short {
   $res;
 }
 
-=head2 C<encode_short( $short )>
-
-Returns a packed short (two bytes).
-
-=cut
 
 sub encode_short {
   pack 'n', $_[0];
 }
 
-=head2 C<decode_string( $data, \$offset )>
-
-Returns a string (short length followed by length bytes) by unpacking
-it from C<$data> starting at the offset read from the scalar
-reference.  The offset reference is subsequently incremented by the
-number of bytes processed.
-
-=cut
 
 sub decode_string {
   my ($data, $offset) = @_;
@@ -181,32 +128,16 @@ sub decode_string {
   $res;
 }
 
-=head2 C<encode_string( $string )>
-
-Returns a packed string (length as a short and then the bytes of the
-string).
-
-=cut
 
 sub encode_string {
   pack "n/a*", $_[0];
 }
 
-=head2 C<qos_string( $qos_value )>
-
-Returns a string describing the given QoS value.
-
-=cut
 
 sub qos_string {
   [qw/at-most-once at-least-once exactly-once reserved/]->[$_[0]]
 }
 
-=head2 C<message_type_string( $message_type_value )>
-
-Returns a string describing the given C<message_type> value.
-
-=cut
 
 sub message_type_string {
   [qw/Reserved0 Connect ConnAck Publish PubAck PubRec PubRel PubComp
@@ -214,12 +145,6 @@ sub message_type_string {
       Reserved15/]->[$_[0]];
 }
 
-=head2 C<dump_string( $data )>
-
-Returns a string representation of arbitrary data - as a string if it
-contains only printable characters or as a hex dump otherwise.
-
-=cut
 
 sub dump_string {
   my $data = shift || '';
@@ -238,11 +163,6 @@ sub dump_string {
 }
 
 
-=head2 C<connect_return_code_string( $return_code_value )>
-
-Returns a string describing the given C<connect_return_code> value.
-
-=cut
 
 sub connect_return_code_string {
   [
@@ -254,3 +174,98 @@ sub connect_return_code_string {
    'Connection Refused: not authorized',
   ]->[$_[0]] || 'Reserved'
 }
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Constants - Module to export constants for MQTT protocol
+
+=head1 VERSION
+
+version 1.112320
+
+=head1 SYNOPSIS
+
+  use Net::MQTT::Constants;
+
+=head1 DESCRIPTION
+
+Module to export constants for MQTT protocol.
+
+=head1 C<FUNCTIONS>
+
+=head2 C<decode_remaining_length( $data, \$offset )>
+
+Calculates the C<remaining length> from the bytes in C<$data> starting
+at the offset read from the scalar reference.  The offset reference is
+subsequently incremented by the number of bytes processed.
+
+=head2 C<encode_remaining_length( $length )>
+
+Calculates the C<remaining length> bytes from the length, C<$length>,
+and returns the packed bytes as a string.
+
+=head2 C<decode_byte( $data, \$offset )>
+
+Returns a byte by unpacking it from C<$data> starting at the offset
+read from the scalar reference.  The offset reference is subsequently
+incremented by the number of bytes processed.
+
+=head2 C<encode_byte( $byte )>
+
+Returns a packed byte.
+
+=head2 C<decode_short( $data, \$offset )>
+
+Returns a short (two bytes) by unpacking it from C<$data> starting at
+the offset read from the scalar reference.  The offset reference is
+subsequently incremented by the number of bytes processed.
+
+=head2 C<encode_short( $short )>
+
+Returns a packed short (two bytes).
+
+=head2 C<decode_string( $data, \$offset )>
+
+Returns a string (short length followed by length bytes) by unpacking
+it from C<$data> starting at the offset read from the scalar
+reference.  The offset reference is subsequently incremented by the
+number of bytes processed.
+
+=head2 C<encode_string( $string )>
+
+Returns a packed string (length as a short and then the bytes of the
+string).
+
+=head2 C<qos_string( $qos_value )>
+
+Returns a string describing the given QoS value.
+
+=head2 C<message_type_string( $message_type_value )>
+
+Returns a string describing the given C<message_type> value.
+
+=head2 C<dump_string( $data )>
+
+Returns a string representation of arbitrary data - as a string if it
+contains only printable characters or as a hex dump otherwise.
+
+=head2 C<connect_return_code_string( $return_code_value )>
+
+Returns a string describing the given C<connect_return_code> value.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

@@ -4,6 +4,20 @@ package Net::MQTT;
 
 # ABSTRACT: Perl modules for MQTT Protocol (http://mqtt.org/)
 
+
+1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)
+
+=head1 VERSION
+
+version 1.112320
+
 =head1 SYNOPSIS
 
   # net-mqtt-sub /topic
@@ -28,6 +42,16 @@ in my spare time (with permission) for fun.
 
 net-mqtt-sub(1), net-mqtt-pub(1),  net-mqtt-trace(1), Net::MQTT::Message(3)
 
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-1;

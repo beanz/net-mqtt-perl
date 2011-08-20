@@ -1,0 +1,55 @@
+{
+   "abstract" : "Perl module to represent MQTT messages",
+   "author" : [
+      "Mark Hindess <soft-cpan@temporalanomaly.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.101670",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Net-MQTT",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.31"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : 0,
+            "Getopt::Long" : 0,
+            "IO::Select" : 0,
+            "IO::Socket::INET" : 0,
+            "Module::Pluggable" : 0,
+            "Net::Pcap" : 0,
+            "Pod::Usage" : 0,
+            "Time::HiRes" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "English" : 0,
+            "Test::More" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/beanz/net-mqtt-perl/issues"
+      },
+      "homepage" : "http://search.cpan.org/dist/Net-MQTT/",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/beanz/net-mqtt-perl.git",
+         "web" : "https://github.com/beanz/net-mqtt-perl"
+      }
+   },
+   "version" : "1.112320"
+}
+

@@ -1,20 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Subscribe;
+BEGIN {
+  $Net::MQTT::Message::Subscribe::VERSION = '1.112320';
+}
 
 # ABSTRACT: Perl module to represent an MQTT Subscribe message
 
-=head1 SYNOPSIS
-
-  # instantiated by Net::MQTT::Message
-
-=head1 DESCRIPTION
-
-This module encapsulates a single MQTT Subscribe message.  It is a
-specific subclass used by L<Net::MQTT::Message> and should not
-need to be instantiated directly.
-
-=cut
 
 use base 'Net::MQTT::Message';
 use Net::MQTT::Constants qw/:all/;
@@ -27,21 +19,9 @@ sub _default_qos {
   MQTT_QOS_AT_LEAST_ONCE
 }
 
-=method C<message_id()>
-
-Returns the message id field of the MQTT Subscribe message.
-
-=cut
 
 sub message_id { shift->{message_id} }
 
-=method C<topics()>
-
-Returns the list of topics of the MQTT Subscribe message.  Each
-element of the list is a 2-ple containing the topic and its associated
-requested QoS level.
-
-=cut
 
 sub topics { shift->{topics} }
 
@@ -78,3 +58,50 @@ sub _remaining_bytes {
 }
 
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message::Subscribe - Perl module to represent an MQTT Subscribe message
+
+=head1 VERSION
+
+version 1.112320
+
+=head1 SYNOPSIS
+
+  # instantiated by Net::MQTT::Message
+
+=head1 DESCRIPTION
+
+This module encapsulates a single MQTT Subscribe message.  It is a
+specific subclass used by L<Net::MQTT::Message> and should not
+need to be instantiated directly.
+
+=head1 METHODS
+
+=head2 C<message_id()>
+
+Returns the message id field of the MQTT Subscribe message.
+
+=head2 C<topics()>
+
+Returns the list of topics of the MQTT Subscribe message.  Each
+element of the list is a 2-ple containing the topic and its associated
+requested QoS level.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

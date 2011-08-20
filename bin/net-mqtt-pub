@@ -5,56 +5,6 @@ use warnings;
 # ABSTRACT: Perl script for publishing to an MQTT topic
 # PODNAME: net-mqtt-pub
 
-=head1 SYNOPSIS
-
-  # messages one per line on stdin
-  echo message | net-mqtt-pub [options] topic
-
-  # message as command line arguments
-  net-mqtt-pub [options] topic this is a message
-
-=head1 OPTIONS
-
-=over
-
-=item B<-help>
-
-Print a brief help message.
-
-=item B<-man>
-
-Print the manual page.
-
-=item B<-host>
-
-The host running the MQTT service.  The default is C<127.0.0.1>.
-
-=item B<-port>
-
-The port of the running MQTT service.  The default is 1883.
-
-=item B<-verbose>
-
-Include more verbose output.  Without this option the script only
-outputs errors
-
-=item B<-keepalive NNN>
-
-The keep alive timer value.  Defaults to 120 seconds.  For simplicity,
-it is also currently used as the connection timeout.
-
-=item B<-retain>
-
-Set the retain flag on the message.  Default is not set.
-
-=back
-
-=head1 DESCRIPTION
-
-This script publishes each line from stdin as an MQTT message on the
-given topic.
-
-=cut
 
 use strict;
 use Net::MQTT::Constants;
@@ -173,6 +123,67 @@ sub read_message {
   return;
 }
 
+
+__END__
+=pod
+
+=head1 NAME
+
+net-mqtt-pub - Perl script for publishing to an MQTT topic
+
+=head1 VERSION
+
+version 1.112320
+
+=head1 SYNOPSIS
+
+  # messages one per line on stdin
+  echo message | net-mqtt-pub [options] topic
+
+  # message as command line arguments
+  net-mqtt-pub [options] topic this is a message
+
+=head1 DESCRIPTION
+
+This script publishes each line from stdin as an MQTT message on the
+given topic.
+
+=head1 OPTIONS
+
+=over
+
+=item B<-help>
+
+Print a brief help message.
+
+=item B<-man>
+
+Print the manual page.
+
+=item B<-host>
+
+The host running the MQTT service.  The default is C<127.0.0.1>.
+
+=item B<-port>
+
+The port of the running MQTT service.  The default is 1883.
+
+=item B<-verbose>
+
+Include more verbose output.  Without this option the script only
+outputs errors
+
+=item B<-keepalive NNN>
+
+The keep alive timer value.  Defaults to 120 seconds.  For simplicity,
+it is also currently used as the connection timeout.
+
+=item B<-retain>
+
+Set the retain flag on the message.  Default is not set.
+
+=back
+
 =head1 SEE ALSO
 
 Net::MQTT::Message(3)
@@ -182,4 +193,16 @@ Net::MQTT::Message(3)
 This is B<not> official IBM code.  I work for IBM but I'm writing this
 in my spare time (with permission) for fun.
 
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
+

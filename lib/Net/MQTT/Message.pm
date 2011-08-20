@@ -1,8 +1,136 @@
 use strict;
 use warnings;
 package Net::MQTT::Message;
+BEGIN {
+  $Net::MQTT::Message::VERSION = '1.112320';
+}
 
 # ABSTRACT: Perl module to represent MQTT messages
+
+
+use Net::MQTT::Constants qw/:all/;
+use Module::Pluggable search_path => __PACKAGE__, require => 1;
+
+our %types;
+foreach (plugins()) {
+  my $m = $_.'::message_type';
+  next unless (defined &{$m}); # avoid super classes
+  my $t = $_->message_type;
+  if (exists $types{$t}) {
+    die 'Duplicate message_type number ', $t, ":\n",
+      '  ', $_, " and\n",
+        '  ', $types{$t}, "\n";
+  }
+  $types{$t} = $_;
+}
+
+
+sub new {
+  my ($pkg, %p) = @_;
+  my $type_pkg =
+    exists $types{$p{message_type}} ? $types{$p{message_type}} : $pkg;
+  bless { %p }, $type_pkg;
+}
+
+
+sub new_from_bytes {
+  my ($pkg, $bytes, $splice) = @_;
+  my %p;
+  return if (length $bytes < 2);
+  my $offset = 0;
+  my $b = decode_byte($bytes, \$offset);
+  $p{message_type} = ($b&0xf0) >> 4;
+  $p{dup} = ($b&0x8)>>3;
+  $p{qos} = ($b&0x6)>>1;
+  $p{retain} = ($b&0x1);
+  my $length;
+  eval {
+    $length = decode_remaining_length($bytes, \$offset);
+  };
+  return if ($@);
+  if (length $bytes < $offset+$length) {
+    return
+  }
+  substr $_[1], 0, $offset+$length, '' if ($splice);
+  $p{remaining} = substr $bytes, $offset, $length;
+  my $self = $pkg->new(%p);
+  $self->_parse_remaining();
+  $self;
+}
+
+sub _parse_remaining {
+}
+
+
+sub message_type { shift->{message_type} }
+
+
+sub dup { shift->{dup} || 0 }
+
+
+sub qos {
+  my $self = shift;
+  defined $self->{qos} ? $self->{qos} : $self->_default_qos
+}
+
+sub _default_qos {
+  MQTT_QOS_AT_MOST_ONCE
+}
+
+
+sub retain { shift->{retain} || 0 }
+
+
+sub remaining { shift->{remaining} || '' }
+
+sub _remaining_string {
+  my ($self, $prefix) = @_;
+  dump_string($self->remaining, $prefix);
+}
+
+sub _remaining_bytes { shift->remaining }
+
+
+sub string {
+  my ($self, $prefix) = @_;
+  $prefix = '' unless (defined $prefix);
+  my @attr;
+  push @attr, qos_string($self->qos);
+  foreach (qw/dup retain/) {
+    my $bool = $self->$_;
+    push @attr, $_ if ($bool);
+  }
+  my $r = $self->_remaining_string($prefix);
+  $prefix.message_type_string($self->message_type).
+    '/'.(join ',', @attr).($r ? ' '.$r : '')
+}
+
+
+sub bytes {
+  my ($self) = shift;
+  my $o = '';
+  my $b =
+    ($self->message_type << 4) | ($self->dup << 3) |
+      ($self->qos << 1) | $self->retain;
+  $o .= encode_byte($b);
+  my $remaining = $self->_remaining_bytes;
+  $o .= encode_remaining_length(length $remaining);
+  $o .= $remaining;
+  $o;
+}
+
+1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message - Perl module to represent MQTT messages
+
+=head1 VERSION
+
+version 1.112320
 
 =head1 SYNOPSIS
 
@@ -22,25 +150,9 @@ package Net::MQTT::Message;
 This module encapsulates a single MQTT message.  It uses subclasses to
 represent specific message types.
 
-=cut
+=head1 METHODS
 
-use Net::MQTT::Constants qw/:all/;
-use Module::Pluggable search_path => __PACKAGE__, require => 1;
-
-our %types;
-foreach (plugins()) {
-  my $m = $_.'::message_type';
-  next unless (defined &{$m}); # avoid super classes
-  my $t = $_->message_type;
-  if (exists $types{$t}) {
-    die 'Duplicate message_type number ', $t, ":\n",
-      '  ', $_, " and\n",
-        '  ', $types{$t}, "\n";
-  }
-  $types{$t} = $_;
-}
-
-=method C<new( %parameters )>
+=head2 C<new( %parameters )>
 
 Constructs an L<Net::MQTT::Message> object based on the given
 parameters.  The common parameter keys are:
@@ -77,16 +189,7 @@ The remaining keys are dependent on the specific message type.  The
 documentation for the subclasses for each message type list methods
 with the same name as the required keys.
 
-=cut
-
-sub new {
-  my ($pkg, %p) = @_;
-  my $type_pkg =
-    exists $types{$p{message_type}} ? $types{$p{message_type}} : $pkg;
-  bless { %p }, $type_pkg;
-}
-
-=method C<new_from_bytes( $packed_bytes, [ $splice ] )>
+=head2 C<new_from_bytes( $packed_bytes, [ $splice ] )>
 
 Attempts to constructs an L<Net::MQTT::Message> object based on
 the given packed byte string.  If there are insufficient bytes, then
@@ -94,134 +197,51 @@ undef is returned.  If the splice parameter is provided and true, then
 the processed bytes are removed from the scalar referenced by the
 $packed_bytes parameter.
 
-=cut
-
-sub new_from_bytes {
-  my ($pkg, $bytes, $splice) = @_;
-  my %p;
-  return if (length $bytes < 2);
-  my $offset = 0;
-  my $b = decode_byte($bytes, \$offset);
-  $p{message_type} = ($b&0xf0) >> 4;
-  $p{dup} = ($b&0x8)>>3;
-  $p{qos} = ($b&0x6)>>1;
-  $p{retain} = ($b&0x1);
-  my $length;
-  eval {
-    $length = decode_remaining_length($bytes, \$offset);
-  };
-  return if ($@);
-  if (length $bytes < $offset+$length) {
-    return
-  }
-  substr $_[1], 0, $offset+$length, '' if ($splice);
-  $p{remaining} = substr $bytes, $offset, $length;
-  my $self = $pkg->new(%p);
-  $self->_parse_remaining();
-  $self;
-}
-
-sub _parse_remaining {
-}
-
-=method C<message_type()>
+=head2 C<message_type()>
 
 Returns the message type field of the MQTT message.  The module
 L<Net::MQTT::Constants> provides a function, C<message_type_string>,
 that can be used to convert this value to a human readable string.
 
-=cut
-
-sub message_type { shift->{message_type} }
-
-=method C<dup()>
+=head2 C<dup()>
 
 The duplicate flag field of the MQTT message.
 
-=cut
-
-sub dup { shift->{dup} || 0 }
-
-=method C<qos()>
+=head2 C<qos()>
 
 The QoS field of the MQTT message.  The module
 L<Net::MQTT::Constants> provides a function, C<qos_string>, that
 can be used to convert this value to a human readable string.
 
-=cut
-
-sub qos {
-  my $self = shift;
-  defined $self->{qos} ? $self->{qos} : $self->_default_qos
-}
-
-sub _default_qos {
-  MQTT_QOS_AT_MOST_ONCE
-}
-
-=method C<retain()>
+=head2 C<retain()>
 
 The retain field of the MQTT message.
 
-=cut
-
-sub retain { shift->{retain} || 0 }
-
-=method C<remaining()>
+=head2 C<remaining()>
 
 This contains a packed string of bytes with any of the payload of the
 MQTT message that was not parsed by these modules.  This should not
 be required for packets that strictly follow the standard.
 
-=cut
-
-sub remaining { shift->{remaining} || '' }
-
-sub _remaining_string {
-  my ($self, $prefix) = @_;
-  dump_string($self->remaining, $prefix);
-}
-
-sub _remaining_bytes { shift->remaining }
-
-=method C<string([ $prefix ])>
+=head2 C<string([ $prefix ])>
 
 Returns a summary of the message as a string suitable for logging.
 If provided, each line will be prefixed by the optional prefix.
 
-=cut
-
-sub string {
-  my ($self, $prefix) = @_;
-  $prefix = '' unless (defined $prefix);
-  my @attr;
-  push @attr, qos_string($self->qos);
-  foreach (qw/dup retain/) {
-    my $bool = $self->$_;
-    push @attr, $_ if ($bool);
-  }
-  my $r = $self->_remaining_string($prefix);
-  $prefix.message_type_string($self->message_type).
-    '/'.(join ',', @attr).($r ? ' '.$r : '')
-}
-
-=method C<bytes()>
+=head2 C<bytes()>
 
 Returns the bytes of the message suitable for writing to a socket.
 
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-sub bytes {
-  my ($self) = shift;
-  my $o = '';
-  my $b =
-    ($self->message_type << 4) | ($self->dup << 3) |
-      ($self->qos << 1) | $self->retain;
-  $o .= encode_byte($b);
-  my $remaining = $self->_remaining_bytes;
-  $o .= encode_remaining_length(length $remaining);
-  $o .= $remaining;
-  $o;
-}
-
-1;

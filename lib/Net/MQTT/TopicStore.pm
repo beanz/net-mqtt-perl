@@ -1,27 +1,12 @@
 use strict;
 use warnings;
 package Net::MQTT::TopicStore;
+BEGIN {
+  $Net::MQTT::TopicStore::VERSION = '1.112320';
+}
 
 # ABSTRACT: Perl module to represent MQTT topic store
 
-=head1 SYNOPSIS
-
-  use Net::MQTT::TopicStore;
-  my $topic_store = Net::MQTT::TopicStore->new();
-  $topic_store->add($topic_pattern1);
-  $topic_store->add($topic_pattern2);
-  my @topics = @{ $topic->get($topic) };
-  $topic_store->remove($topic_pattern2);
-
-=head1 DESCRIPTION
-
-This module encapsulates a single MQTT topic store.
-
-=method C<new( )>
-
-Constructs a L<Net::MQTT::TopicStore> object.
-
-=cut
 
 sub new {
   my $pkg = shift;
@@ -30,11 +15,6 @@ sub new {
   $self
 }
 
-=method C<add( $topic_pattern )>
-
-Adds the topic pattern to the store.
-
-=cut
 
 sub add {
   my ($self, $topic_pattern) = @_;
@@ -44,22 +24,12 @@ sub add {
   $topic_pattern
 }
 
-=method C<delete( $topic_pattern )>
-
-Remove the topic pattern from the store.
-
-=cut
 
 sub delete {
   my ($self, $topic) = @_;
   delete $self->{topics}->{$topic};
 }
 
-=method C<values( $topic )>
-
-Returns all the topic patterns in the store that apply to the given topic.
-
-=cut
 
 sub values {
   my ($self, $topic) = @_;
@@ -89,4 +59,60 @@ sub _topic_to_regexp {
 }
 
 1;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::TopicStore - Perl module to represent MQTT topic store
+
+=head1 VERSION
+
+version 1.112320
+
+=head1 SYNOPSIS
+
+  use Net::MQTT::TopicStore;
+  my $topic_store = Net::MQTT::TopicStore->new();
+  $topic_store->add($topic_pattern1);
+  $topic_store->add($topic_pattern2);
+  my @topics = @{ $topic->get($topic) };
+  $topic_store->remove($topic_pattern2);
+
+=head1 DESCRIPTION
+
+This module encapsulates a single MQTT topic store.
+
+=head1 METHODS
+
+=head2 C<new( )>
+
+Constructs a L<Net::MQTT::TopicStore> object.
+
+=head2 C<add( $topic_pattern )>
+
+Adds the topic pattern to the store.
+
+=head2 C<delete( $topic_pattern )>
+
+Remove the topic pattern from the store.
+
+=head2 C<values( $topic )>
+
+Returns all the topic patterns in the store that apply to the given topic.
+
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 

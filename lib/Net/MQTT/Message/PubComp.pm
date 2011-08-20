@@ -1,8 +1,33 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::PubComp;
+BEGIN {
+  $Net::MQTT::Message::PubComp::VERSION = '1.112320';
+}
 
 # ABSTRACT: Perl module to represent an MQTT PubComp message
+
+
+use base 'Net::MQTT::Message::JustMessageId';
+use Net::MQTT::Constants qw/:all/;
+
+sub message_type {
+  7
+}
+
+
+1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Net::MQTT::Message::PubComp - Perl module to represent an MQTT PubComp message
+
+=head1 VERSION
+
+version 1.112320
 
 =head1 SYNOPSIS
 
@@ -14,19 +39,22 @@ This module encapsulates a single MQTT Publish Complete message.  It
 is a specific subclass used by L<Net::MQTT::Message> and should
 not need to be instantiated directly.
 
-=cut
+=head1 METHODS
 
-use base 'Net::MQTT::Message::JustMessageId';
-use Net::MQTT::Constants qw/:all/;
-
-sub message_type {
-  7
-}
-
-=method C<message_id()>
+=head2 C<message_id()>
 
 Returns the message id field of the MQTT Publish Complete message.
 
+=head1 AUTHOR
+
+Mark Hindess <soft-cpan@temporalanomaly.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Mark Hindess.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-1;
