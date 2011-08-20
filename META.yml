@@ -27,4 +27,4 @@ resources:
   bugtracker: https://github.com/beanz/net-mqtt-perl/issues
   homepage: http://search.cpan.org/dist/Net-MQTT/
   repository: git://github.com/beanz/net-mqtt-perl.git
-version: 1.111960
+version: 1.112320

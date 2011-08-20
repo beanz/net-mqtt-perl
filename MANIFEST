@@ -34,6 +34,7 @@ lib/Net/MQTT/Message/SubAck.pm
 lib/Net/MQTT/Message/Subscribe.pm
 lib/Net/MQTT/Message/UnsubAck.pm
 lib/Net/MQTT/Message/Unsubscribe.pm
+lib/Net/MQTT/TopicStore.pm
 t/01-message.t
 t/01-topic.t
 t/02-messages.t
@@ -57,6 +58,8 @@ t/msg/15-connect-auth.txt
 t/msg/16-publish-qos-level-2.txt
 t/msg/17-connack-with-error.txt
 t/msg/18-connect-will.txt
+t/msg/19-pingreq-with-payload.txt
+t/msg/20-pingresp-with-payload.txt
 t/release-common_spelling.t
 t/release-eol.t
 t/release-kwalitee.t

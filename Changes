@@ -1,6 +1,6 @@
 Revision history for Perl extension Net::MQTT.
 
-1.111960  2011-07-15 23:24:08 Europe/London
+1.112320  2011-08-20 22:31:47 Europe/London
 
 1.110400  2011-02-09 19:24:51 Europe/London
     - Fix topic test to work on perl 5.8 and older.

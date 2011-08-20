@@ -117,7 +117,7 @@ net-mqtt-sub - Perl script for subscribing to an MQTT topic
 
 =head1 VERSION
 
-version 1.111960
+version 1.112320
 
 =head1 SYNOPSIS
 

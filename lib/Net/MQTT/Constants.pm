@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Constants;
 BEGIN {
-  $Net::MQTT::Constants::VERSION = '1.111960';
+  $Net::MQTT::Constants::VERSION = '1.112320';
 }
 
 # ABSTRACT: Module to export constants for MQTT protocol
@@ -54,7 +54,6 @@ sub import {
               message_type_string
               dump_string
               connect_return_code_string
-              topic_to_regexp
              /) {
     *{$pkg.'::'.$_} = \&{$_};
   }
@@ -176,22 +175,6 @@ sub connect_return_code_string {
   ]->[$_[0]] || 'Reserved'
 }
 
-
-sub topic_to_regexp {
-  my $topic = shift;
-  my $c;
-  $topic = quotemeta $topic;
-  $c += ($topic =~ s!\\/\\\+!\\/[^/]*!g);
-  $c += ($topic =~ s!\\/\\#$!.*!);
-  $c += ($topic =~ s!^\\\+\\/![^/]*\\/!g);
-  $c += ($topic =~ s!^\\\+$![^/]*!g);
-  $c += ($topic =~ s!^\\#$!.*!);
-  unless ($c) {
-    return;
-  }
-  qr/^$topic$/
-}
-
 __END__
 =pod
 
@@ -201,7 +184,7 @@ Net::MQTT::Constants - Module to export constants for MQTT protocol
 
 =head1 VERSION
 
-version 1.111960
+version 1.112320
 
 =head1 SYNOPSIS
 
@@ -272,11 +255,6 @@ contains only printable characters or as a hex dump otherwise.
 =head2 C<connect_return_code_string( $return_code_value )>
 
 Returns a string describing the given C<connect_return_code> value.
-
-=head2 C<topic_to_regexp( $topic )>
-
-Takes a topic and returns an equivalent regexp if it contains wild
-cards or undef if it doesn't contain wild cards.
 
 =head1 AUTHOR
 
