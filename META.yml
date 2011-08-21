@@ -20,11 +20,10 @@ requires:
   IO::Select: 0
   IO::Socket::INET: 0
   Module::Pluggable: 0
-  Net::Pcap: 0
   Pod::Usage: 0
   Time::HiRes: 0
 resources:
   bugtracker: https://github.com/beanz/net-mqtt-perl/issues
   homepage: http://search.cpan.org/dist/Net-MQTT/
   repository: git://github.com/beanz/net-mqtt-perl.git
-version: 1.112320
+version: 1.112330
