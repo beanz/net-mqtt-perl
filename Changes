@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+
+1.112330  2011-08-21 18:24:34 Europe/London
     - Reduce requirement for Net::Pcap.
 
 1.112320  2011-08-20 22:41:19 Europe/London
