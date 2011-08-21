@@ -26,9 +26,11 @@
             "IO::Select" : 0,
             "IO::Socket::INET" : 0,
             "Module::Pluggable" : 0,
-            "Net::Pcap" : 0,
             "Pod::Usage" : 0,
             "Time::HiRes" : 0
+         },
+         "suggests" : {
+            "Net::Pcap" : 0
          }
       },
       "test" : {
@@ -50,6 +52,6 @@
          "web" : "https://github.com/beanz/net-mqtt-perl"
       }
    },
-   "version" : "1.112320"
+   "version" : "1.112330"
 }
 

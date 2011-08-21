@@ -32,11 +32,10 @@ my %WriteMakefileArgs = (
     'IO::Select' => '0',
     'IO::Socket::INET' => '0',
     'Module::Pluggable' => '0',
-    'Net::Pcap' => '0',
     'Pod::Usage' => '0',
     'Time::HiRes' => '0'
   },
-  'VERSION' => '1.112320',
+  'VERSION' => '1.112330',
   'test' => {
     'TESTS' => 't/*.t'
   }
