@@ -56,7 +56,7 @@ sub user_name_flag {
 =method C<password_flag()>
 
 Returns the password flag field of the MQTT Connect message.  The
-default is true if and only if a user name is defined.
+default is true if and only if a password is defined.
 
 =cut
 
