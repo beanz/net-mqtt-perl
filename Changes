@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix test problem with hash key ordering.  Thanks to andk
+      and CPAN Testers.
 
 1.112330  2011-08-21 18:24:34 Europe/London
     - Reduce requirement for Net::Pcap.
