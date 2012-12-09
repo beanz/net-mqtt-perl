@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package Net::MQTT::TopicStore;
-BEGIN {
-  $Net::MQTT::TopicStore::VERSION = '1.112330';
+{
+  $Net::MQTT::TopicStore::VERSION = '1.123440';
 }
 
 # ABSTRACT: Perl module to represent MQTT topic store
@@ -70,7 +70,7 @@ Net::MQTT::TopicStore - Perl module to represent MQTT topic store
 
 =head1 VERSION
 
-version 1.112330
+version 1.123440
 
 =head1 SYNOPSIS
 
