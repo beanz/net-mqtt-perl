@@ -4,40 +4,42 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Perl module to represent MQTT messages',
-  'AUTHOR' => 'Mark Hindess <soft-cpan@temporalanomaly.com>',
-  'BUILD_REQUIRES' => {
-    'English' => '0',
-    'Test::More' => '0'
+  "ABSTRACT" => "Perl module to represent MQTT messages",
+  "AUTHOR" => "Mark Hindess <soft-cpan\@temporalanomaly.com>",
+  "BUILD_REQUIRES" => {
+    "Test::More" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Net-MQTT',
-  'EXE_FILES' => [
-    'bin/net-mqtt-pub',
-    'bin/net-mqtt-trace',
-    'bin/net-mqtt-sub'
+  "DISTNAME" => "Net-MQTT",
+  "EXE_FILES" => [
+    "bin/net-mqtt-pub",
+    "bin/net-mqtt-trace",
+    "bin/net-mqtt-sub"
   ],
-  'LICENSE' => 'perl',
-  'NAME' => 'Net::MQTT',
-  'PREREQ_PM' => {
-    'Carp' => '0',
-    'Getopt::Long' => '0',
-    'IO::Select' => '0',
-    'IO::Socket::INET' => '0',
-    'Module::Pluggable' => '0',
-    'Pod::Usage' => '0',
-    'Time::HiRes' => '0'
+  "LICENSE" => "perl",
+  "NAME" => "Net::MQTT",
+  "PREREQ_PM" => {
+    "Carp" => 0,
+    "Getopt::Long" => 0,
+    "IO::Select" => 0,
+    "IO::Socket::INET" => 0,
+    "Module::Pluggable" => 0,
+    "Pod::Usage" => 0,
+    "Time::HiRes" => 0,
+    "base" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '1.112330',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "1.123440",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

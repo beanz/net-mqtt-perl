@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
-BEGIN {
-  $Net::MQTT::Message::Connect::VERSION = '1.112330';
+{
+  $Net::MQTT::Message::Connect::VERSION = '1.123440';
 }
 
 # ABSTRACT: Perl module to represent an MQTT Connect message
@@ -139,7 +139,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.112330
+version 1.123440
 
 =head1 SYNOPSIS
 
@@ -171,7 +171,7 @@ default is true if and only if a user name is defined.
 =head2 C<password_flag()>
 
 Returns the password flag field of the MQTT Connect message.  The
-default is true if and only if a user name is defined.
+default is true if and only if a password is defined.
 
 =head2 C<will_retain()>
 

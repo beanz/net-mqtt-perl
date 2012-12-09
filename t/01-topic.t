@@ -77,5 +77,5 @@ check_matches($topic_store, 'test', '#', '... matches test');
 sub check_matches {
   my ($store, $topic, $expect, $desc) = @_;
   my $matches = $store->values($topic);
-  is((join ', ', @{$matches||[]}), $expect, $desc);
+  is((join ', ', sort @{$matches||[]}), $expect, $desc);
 }

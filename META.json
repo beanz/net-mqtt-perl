@@ -4,7 +4,7 @@
       "Mark Hindess <soft-cpan@temporalanomaly.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.101670",
+   "generated_by" : "Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -16,27 +16,36 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.31"
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Pod::Coverage::TrustPod" : "0",
+            "Test::Pod" : "1.41",
+            "Test::Pod::Coverage" : "1.08"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "Getopt::Long" : 0,
-            "IO::Select" : 0,
-            "IO::Socket::INET" : 0,
-            "Module::Pluggable" : 0,
-            "Pod::Usage" : 0,
-            "Time::HiRes" : 0
+            "Carp" : "0",
+            "Getopt::Long" : "0",
+            "IO::Select" : "0",
+            "IO::Socket::INET" : "0",
+            "Module::Pluggable" : "0",
+            "Pod::Usage" : "0",
+            "Time::HiRes" : "0",
+            "base" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          },
          "suggests" : {
-            "Net::Pcap" : 0
+            "Net::Pcap" : "0"
          }
       },
       "test" : {
          "requires" : {
-            "English" : 0,
-            "Test::More" : 0
+            "Test::More" : "0"
          }
       }
    },
@@ -52,6 +61,6 @@
          "web" : "https://github.com/beanz/net-mqtt-perl"
       }
    },
-   "version" : "1.112330"
+   "version" : "1.123440"
 }
 

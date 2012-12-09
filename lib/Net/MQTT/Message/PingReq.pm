@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::PingReq;
-BEGIN {
-  $Net::MQTT::Message::PingReq::VERSION = '1.112330';
+{
+  $Net::MQTT::Message::PingReq::VERSION = '1.123440';
 }
 
 # ABSTRACT: Perl module to represent an MQTT PingReq message
@@ -25,7 +25,7 @@ Net::MQTT::Message::PingReq - Perl module to represent an MQTT PingReq message
 
 =head1 VERSION
 
-version 1.112330
+version 1.123440
 
 =head1 SYNOPSIS
 
