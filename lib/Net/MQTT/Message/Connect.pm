@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
 {
-  $Net::MQTT::Message::Connect::VERSION = '1.123440';
+  $Net::MQTT::Message::Connect::VERSION = '1.130180';
 }
 
 # ABSTRACT: Perl module to represent an MQTT Connect message
@@ -139,7 +139,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.123440
+version 1.130180
 
 =head1 SYNOPSIS
 
