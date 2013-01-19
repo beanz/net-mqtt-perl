@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Message::PubAck;
 {
-  $Net::MQTT::Message::PubAck::VERSION = '1.123440';
+  $Net::MQTT::Message::PubAck::VERSION = '1.130190';
 }
 
 # ABSTRACT: Perl module to represent an MQTT PubAck message
@@ -27,7 +27,7 @@ Net::MQTT::Message::PubAck - Perl module to represent an MQTT PubAck message
 
 =head1 VERSION
 
-version 1.123440
+version 1.130190
 
 =head1 SYNOPSIS
 
