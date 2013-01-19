@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Message::Disconnect;
 {
-  $Net::MQTT::Message::Disconnect::VERSION = '1.130180';
+  $Net::MQTT::Message::Disconnect::VERSION = '1.130190';
 }
 
 # ABSTRACT: Perl module to represent an MQTT Disconnect message
@@ -25,7 +25,7 @@ Net::MQTT::Message::Disconnect - Perl module to represent an MQTT Disconnect mes
 
 =head1 VERSION
 
-version 1.130180
+version 1.130190
 
 =head1 SYNOPSIS
 

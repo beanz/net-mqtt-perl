@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
-1.130180  2013-01-18 23:39:35 Europe/London
+1.130190  2013-01-19 09:22:16 Europe/London
+    - Remove unintended files from distribution.
 
 1.123440  2012-12-09 15:23:47 Europe/London
     - Fix test problem with hash key ordering.  Thanks to andk
