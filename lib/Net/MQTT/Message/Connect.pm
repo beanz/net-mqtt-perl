@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
 {
-  $Net::MQTT::Message::Connect::VERSION = '1.130190';
+  $Net::MQTT::Message::Connect::VERSION = '1.133430';
 }
 
 # ABSTRACT: Perl module to represent an MQTT Connect message
@@ -40,7 +40,7 @@ sub will_retain { shift->{will_retain} || 0 }
 sub will_qos { shift->{will_qos} || 0 }
 
 
-sub will_flag { shift->{will_flag} || 0 }
+sub will_flag { shift->{will_flag} || defined $self->{will_topic} }
 
 
 sub clean_session {
@@ -139,7 +139,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.130190
+version 1.133430
 
 =head1 SYNOPSIS
 
@@ -185,8 +185,8 @@ is 0.
 
 =head2 C<will_flag()>
 
-Returns the will flag field of the MQTT Connect message.  The default
-is 0.
+Returns the will flag field of the MQTT Connect message.  The
+default is true if and only if a will topic is defined.
 
 =head2 C<clean_session()>
 
