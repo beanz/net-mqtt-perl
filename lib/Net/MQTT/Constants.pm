@@ -178,6 +178,8 @@ sub connect_return_code_string {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Constants - Module to export constants for MQTT protocol

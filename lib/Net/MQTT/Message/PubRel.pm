@@ -25,6 +25,8 @@ sub _default_qos {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::PubRel - Perl module to represent an MQTT PubRel message

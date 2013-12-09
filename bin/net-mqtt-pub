@@ -127,6 +127,8 @@ sub read_message {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 net-mqtt-pub - Perl script for publishing to an MQTT topic

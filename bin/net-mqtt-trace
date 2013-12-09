@@ -184,6 +184,8 @@ sub packet {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 net-mqtt-trace - Perl script for decoding MQTT messages from IP packets

@@ -136,6 +136,8 @@ sub _remaining_bytes {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message

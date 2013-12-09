@@ -19,6 +19,8 @@ sub message_type {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::PingResp - Perl module to represent an MQTT PingResp message

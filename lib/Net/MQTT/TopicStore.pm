@@ -64,6 +64,8 @@ sub _topic_to_regexp {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::TopicStore - Perl module to represent MQTT topic store

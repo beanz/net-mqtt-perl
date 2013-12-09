@@ -53,6 +53,8 @@ sub _remaining_bytes {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::SubAck - Perl module to represent an MQTT SubAck message

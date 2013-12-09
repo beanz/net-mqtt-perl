@@ -58,6 +58,8 @@ sub _remaining_bytes {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::Publish - Perl module to represent an MQTT Publish message

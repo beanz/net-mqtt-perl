@@ -111,6 +111,8 @@ sub read_message {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 net-mqtt-sub - Perl script for subscribing to an MQTT topic

@@ -10,6 +10,8 @@ package Net::MQTT;
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)

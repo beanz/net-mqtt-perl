@@ -36,6 +36,8 @@ sub _remaining_bytes {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::JustMessageId - Perl module for an MQTT message w/message id only payload

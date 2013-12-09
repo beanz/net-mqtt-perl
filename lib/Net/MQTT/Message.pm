@@ -124,6 +124,8 @@ sub bytes {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message - Perl module to represent MQTT messages

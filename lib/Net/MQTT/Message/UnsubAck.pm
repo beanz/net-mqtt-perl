@@ -21,6 +21,8 @@ sub message_type {
 __END__
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Net::MQTT::Message::UnsubAck - Perl module to represent an MQTT UnsubAck message
