@@ -85,12 +85,15 @@ sub will_qos { shift->{will_qos} || 0 }
 
 =method C<will_flag()>
 
-Returns the will flag field of the MQTT Connect message.  The default
-is 0.
+Returns the will flag field of the MQTT Connect message.  The
+default is true if and only if a will topic is defined.
 
 =cut
 
-sub will_flag { shift->{will_flag} || 0 }
+sub will_flag {
+  my $self = shift;
+  $self->{will_flag} || defined $self->{will_topic}
+}
 
 =method C<clean_session()>
 
