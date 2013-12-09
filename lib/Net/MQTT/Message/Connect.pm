@@ -40,7 +40,10 @@ sub will_retain { shift->{will_retain} || 0 }
 sub will_qos { shift->{will_qos} || 0 }
 
 
-sub will_flag { shift->{will_flag} || defined $self->{will_topic} }
+sub will_flag {
+  my $self = shift;
+  $self->{will_flag} || defined $self->{will_topic}
+}
 
 
 sub clean_session {
