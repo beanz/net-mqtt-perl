@@ -1,88 +1,29 @@
 NAME
-    Net::MQTT::Message - Perl module to represent MQTT messages
+    Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)
 
 VERSION
     version 1.133430
 
 SYNOPSIS
-      use Net::MQTT::Constants;
-      use Net::MQTT::Message;
-      use IO::Socket::INET;
-      my $socket = IO::Socket::INET->new(PeerAddr => '127.0.0.1:1883');
-      my $mqtt = Net::MQTT::Message->new(message_type => MQTT_CONNECT);
-      print $socket $mqtt->bytes;
+      # net-mqtt-sub /topic
 
-      my $tcp_payload = pack 'H*', '300d000774657374696e6774657374';
-      $mqtt = Net::MQTT::Message->new_from_bytes($tcp_payload);
-      print 'Received: ', $mqtt->string, "\n";
+      # net-mqtt-pub /topic message
+
+      # net-mqtt-trace mqtt.tcp
 
 DESCRIPTION
-    This module encapsulates a single MQTT message. It uses subclasses to
-    represent specific message types.
+    Low level API for the MQTT protocol described at <http://mqtt.org>.
 
-METHODS
-  "new( %parameters )"
-    Constructs an Net::MQTT::Message object based on the given parameters.
-    The common parameter keys are:
+    IMPORTANT: This is an early release and the API is still subject to
+    change.
 
-    "message_type"
-        The message type field of the MQTT message. This should be an
-        integer between 0 and 15 inclusive. The module Net::MQTT::Constants
-        provides constants that can be used for this value. This parameter
-        is required.
+DISCLAIMER
+    This is not official IBM code. I work for IBM but I'm writing this in my
+    spare time (with permission) for fun.
 
-    "dup"
-        The duplicate flag field of the MQTT message. This should be either
-        1 or 0. The default is 0.
-
-    "qos"
-        The QoS field of the MQTT message. This should be an integer between
-        0 and 3 inclusive. The default is as specified in the spec or 0 ("at
-        most once") otherwise. The module Net::MQTT::Constants provides
-        constants that can be used for this value.
-
-    "retain"
-        The retain flag field of the MQTT message. This should be either 1
-        or 0. The default is 0.
-
-    The remaining keys are dependent on the specific message type. The
-    documentation for the subclasses for each message type list methods with
-    the same name as the required keys.
-
-  "new_from_bytes( $packed_bytes, [ $splice ] )"
-    Attempts to constructs an Net::MQTT::Message object based on the given
-    packed byte string. If there are insufficient bytes, then undef is
-    returned. If the splice parameter is provided and true, then the
-    processed bytes are removed from the scalar referenced by the
-    $packed_bytes parameter.
-
-  "message_type()"
-    Returns the message type field of the MQTT message. The module
-    Net::MQTT::Constants provides a function, "message_type_string", that
-    can be used to convert this value to a human readable string.
-
-  "dup()"
-    The duplicate flag field of the MQTT message.
-
-  "qos()"
-    The QoS field of the MQTT message. The module Net::MQTT::Constants
-    provides a function, "qos_string", that can be used to convert this
-    value to a human readable string.
-
-  "retain()"
-    The retain field of the MQTT message.
-
-  "remaining()"
-    This contains a packed string of bytes with any of the payload of the
-    MQTT message that was not parsed by these modules. This should not be
-    required for packets that strictly follow the standard.
-
-  "string([ $prefix ])"
-    Returns a summary of the message as a string suitable for logging. If
-    provided, each line will be prefixed by the optional prefix.
-
-  "bytes()"
-    Returns the bytes of the message suitable for writing to a socket.
+SEE ALSO
+    net-mqtt-sub(1), net-mqtt-pub(1), net-mqtt-trace(1),
+    Net::MQTT::Message(3)
 
 AUTHOR
     Mark Hindess <soft-cpan@temporalanomaly.com>

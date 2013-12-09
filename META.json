@@ -1,5 +1,5 @@
 {
-   "abstract" : "Perl module to represent MQTT messages",
+   "abstract" : "Perl modules for MQTT Protocol (http://mqtt.org/)",
    "author" : [
       "Mark Hindess <soft-cpan@temporalanomaly.com>"
    ],

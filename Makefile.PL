@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Perl module to represent MQTT messages",
+  "ABSTRACT" => "Perl modules for MQTT Protocol (http://mqtt.org/)",
   "AUTHOR" => "Mark Hindess <soft-cpan\@temporalanomaly.com>",
   "BUILD_REQUIRES" => {
     "Test::More" => 0
