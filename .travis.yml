@@ -1,7 +1,10 @@
 language: perl
 perl:
   - 5.18
+branches:
+  only:
+    - /^build/
 before_install:
   cpanm -n Devel::Cover::Report::Coveralls
 script:
-  perl Makefile.PL && make && cover -test -report coveralls
+  perl Makefile.PL && make && RELEASE_TESTING=1 AUTHOR_TESTING=1 HARNESS_VERBOSE=1 cover -test -report coveralls
