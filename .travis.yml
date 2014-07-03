@@ -1,0 +1,7 @@
+language: perl
+perl:
+  - 5.18
+before_install:
+  cpanm -n Devel::Cover::Report::Coveralls
+script:
+  perl Makefile.PL && make && cover -test -report coveralls
