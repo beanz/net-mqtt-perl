@@ -1,6 +1,6 @@
 Revision history for Perl extension Net::MQTT.
 
-1.141840  2014-07-03 13:53:40+01:00 Europe/London
+1.141840  2014-07-03 19:16:12+01:00 Europe/London
 
 1.130190  2013-01-19 09:23:43 Europe/London
     - Remove unintended files from distribution.
