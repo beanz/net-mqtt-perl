@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Subscribe;
-{
-  $Net::MQTT::Message::Subscribe::VERSION = '1.133430';
-}
-
+$Net::MQTT::Message::Subscribe::VERSION = '1.141840';
 # ABSTRACT: Perl module to represent an MQTT Subscribe message
 
 
@@ -60,6 +57,7 @@ sub _remaining_bytes {
 1;
 
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -70,7 +68,7 @@ Net::MQTT::Message::Subscribe - Perl module to represent an MQTT Subscribe messa
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -106,4 +104,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

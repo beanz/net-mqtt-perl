@@ -180,8 +180,8 @@ sub packet {
   $glob->{count}->{message_type_string($mqtt->message_type)}++;
 }
 
-
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -192,7 +192,7 @@ net-mqtt-trace - Perl script for decoding MQTT messages from IP packets
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -294,4 +294,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

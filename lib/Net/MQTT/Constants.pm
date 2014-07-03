@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Constants;
-{
-  $Net::MQTT::Constants::VERSION = '1.133430';
-}
-
+$Net::MQTT::Constants::VERSION = '1.141840';
 # ABSTRACT: Module to export constants for MQTT protocol
 
 
@@ -176,6 +173,7 @@ sub connect_return_code_string {
 }
 
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -186,7 +184,7 @@ Net::MQTT::Constants - Module to export constants for MQTT protocol
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -270,4 +268,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

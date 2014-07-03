@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::TopicStore;
-{
-  $Net::MQTT::TopicStore::VERSION = '1.133430';
-}
-
+$Net::MQTT::TopicStore::VERSION = '1.141840';
 # ABSTRACT: Perl module to represent MQTT topic store
 
 
@@ -60,8 +57,8 @@ sub _topic_to_regexp {
 
 1;
 
-
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -72,7 +69,7 @@ Net::MQTT::TopicStore - Perl module to represent MQTT topic store
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -117,4 +114,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

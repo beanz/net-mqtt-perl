@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
-{
-  $Net::MQTT::Message::Connect::VERSION = '1.133430';
-}
-
+$Net::MQTT::Message::Connect::VERSION = '1.141840';
 # ABSTRACT: Perl module to represent an MQTT Connect message
 
 
@@ -134,6 +131,7 @@ sub _remaining_bytes {
 1;
 
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -144,7 +142,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -246,4 +244,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

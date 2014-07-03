@@ -9,7 +9,7 @@ BEGIN {
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::NoTabsTests 0.05
+# this test was generated with Dist::Zilla::Plugin::NoTabsTests 0.08
 
 use Test::More 0.88;
 use Test::NoTabs;
@@ -36,7 +36,40 @@ my @files = (
     'lib/Net/MQTT/Message/Subscribe.pm',
     'lib/Net/MQTT/Message/UnsubAck.pm',
     'lib/Net/MQTT/Message/Unsubscribe.pm',
-    'lib/Net/MQTT/TopicStore.pm'
+    'lib/Net/MQTT/TopicStore.pm',
+    't/01-message.t',
+    't/01-topic.t',
+    't/02-messages.t',
+    't/03-errors.t',
+    't/author-critic.t',
+    't/author-test-eol.t',
+    't/msg/01-connect.txt',
+    't/msg/02-connack.txt',
+    't/msg/03-publish.txt',
+    't/msg/04-puback.txt',
+    't/msg/05-pubrec.txt',
+    't/msg/06-pubrel.txt',
+    't/msg/07-pubcomp.txt',
+    't/msg/08-subscribe.txt',
+    't/msg/09-suback.txt',
+    't/msg/10-unsubscribe.txt',
+    't/msg/11-unsuback.txt',
+    't/msg/12-pingreq.txt',
+    't/msg/13-pingresp.txt',
+    't/msg/14-disconnect.txt',
+    't/msg/15-connect-auth.txt',
+    't/msg/16-publish-qos-level-2.txt',
+    't/msg/17-connack-with-error.txt',
+    't/msg/18-connect-will.txt',
+    't/msg/19-pingreq-with-payload.txt',
+    't/msg/20-pingresp-with-payload.txt',
+    't/release-common_spelling.t',
+    't/release-kwalitee.t',
+    't/release-no-tabs.t',
+    't/release-pod-coverage.t',
+    't/release-pod-linkcheck.t',
+    't/release-pod-no404s.t',
+    't/release-pod-syntax.t'
 );
 
 notabs_ok($_) foreach @files;

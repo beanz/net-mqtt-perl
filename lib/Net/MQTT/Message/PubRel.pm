@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::PubRel;
-{
-  $Net::MQTT::Message::PubRel::VERSION = '1.133430';
-}
-
+$Net::MQTT::Message::PubRel::VERSION = '1.141840';
 # ABSTRACT: Perl module to represent an MQTT PubRel message
 
 
@@ -23,6 +20,7 @@ sub _default_qos {
 1;
 
 __END__
+
 =pod
 
 =encoding UTF-8
@@ -33,7 +31,7 @@ Net::MQTT::Message::PubRel - Perl module to represent an MQTT PubRel message
 
 =head1 VERSION
 
-version 1.133430
+version 1.141840
 
 =head1 SYNOPSIS
 
@@ -63,4 +61,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
