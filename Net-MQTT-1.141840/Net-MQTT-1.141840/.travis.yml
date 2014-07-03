@@ -1,12 +1,14 @@
 language: perl
 perl:
+  - 5.20
   - 5.18
 branches:
   only:
     - /^build/
+    - /^releases/
 before_install:
   - cpanm -n Devel::Cover::Report::Coveralls
-  - dzil authordeps --missing | xargs -n 5 -P 10 cpanm --quiet --notest
+  - dzil authordeps --missing | xargs -n 5 -P 10 cpanm --notest
   - export AUTOMATED_TESTING=1 RELEASE_TESTING=1 AUTHOR_TESTING=1
   - export HARNESS_OPTIONS=j10:c HARNESS_TIMER=1 HARNESS_VERBOSE=1
 script:
