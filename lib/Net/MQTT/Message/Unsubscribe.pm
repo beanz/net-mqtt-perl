@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Unsubscribe;
-$Net::MQTT::Message::Unsubscribe::VERSION = '1.141840';
+$Net::MQTT::Message::Unsubscribe::VERSION = '1.141990';
 # ABSTRACT: Perl module to represent an MQTT Unsubscribe message
 
 
@@ -63,7 +63,7 @@ Net::MQTT::Message::Unsubscribe - Perl module to represent an MQTT Unsubscribe m
 
 =head1 VERSION
 
-version 1.141840
+version 1.141990
 
 =head1 SYNOPSIS
 
