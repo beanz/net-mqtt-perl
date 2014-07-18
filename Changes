@@ -1,6 +1,6 @@
 Revision history for Perl extension Net::MQTT.
 
-1.141990  2014-07-18 21:05:36+01:00 Europe/London
+1.141990  2014-07-18 21:07:25+01:00 Europe/London
     - Fix to will message handling.
 
 1.130190  2013-01-19 09:23:43 Europe/London
