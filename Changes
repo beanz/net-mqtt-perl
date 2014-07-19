@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix bad packaging.
 
 1.142000  2014-07-19 08:25:34+01:00 Europe/London
     - Fix to will message handling.
