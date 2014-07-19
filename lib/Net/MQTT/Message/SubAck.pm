@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::SubAck;
-{
-  $Net::MQTT::Message::SubAck::VERSION = '1.130190';
-}
-
+$Net::MQTT::Message::SubAck::VERSION = '1.142000';
 # ABSTRACT: Perl module to represent an MQTT SubAck message
 
 
@@ -51,7 +48,10 @@ sub _remaining_bytes {
 1;
 
 __END__
+
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -59,7 +59,7 @@ Net::MQTT::Message::SubAck - Perl module to represent an MQTT SubAck message
 
 =head1 VERSION
 
-version 1.130190
+version 1.142000
 
 =head1 SYNOPSIS
 
@@ -89,10 +89,9 @@ Mark Hindess <soft-cpan@temporalanomaly.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Mark Hindess.
+This software is copyright (c) 2014 by Mark Hindess.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

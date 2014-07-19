@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
-{
-  $Net::MQTT::Message::Connect::VERSION = '1.130190';
-}
-
+$Net::MQTT::Message::Connect::VERSION = '1.142000';
 # ABSTRACT: Perl module to represent an MQTT Connect message
 
 
@@ -40,7 +37,10 @@ sub will_retain { shift->{will_retain} || 0 }
 sub will_qos { shift->{will_qos} || 0 }
 
 
-sub will_flag { shift->{will_flag} || 0 }
+sub will_flag {
+  my $self = shift;
+  $self->{will_flag} || defined $self->{will_topic}
+}
 
 
 sub clean_session {
@@ -131,7 +131,10 @@ sub _remaining_bytes {
 1;
 
 __END__
+
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -139,7 +142,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.130190
+version 1.142000
 
 =head1 SYNOPSIS
 
@@ -185,8 +188,8 @@ is 0.
 
 =head2 C<will_flag()>
 
-Returns the will flag field of the MQTT Connect message.  The default
-is 0.
+Returns the will flag field of the MQTT Connect message.  The
+default is true if and only if a will topic is defined.
 
 =head2 C<clean_session()>
 
@@ -235,10 +238,9 @@ Mark Hindess <soft-cpan@temporalanomaly.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Mark Hindess.
+This software is copyright (c) 2014 by Mark Hindess.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
