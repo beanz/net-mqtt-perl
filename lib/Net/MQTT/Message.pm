@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message;
-$Net::MQTT::Message::VERSION = '1.141990';
+$Net::MQTT::Message::VERSION = '1.142000';
 # ABSTRACT: Perl module to represent MQTT messages
 
 
@@ -130,7 +130,7 @@ Net::MQTT::Message - Perl module to represent MQTT messages
 
 =head1 VERSION
 
-version 1.141990
+version 1.142000
 
 =head1 SYNOPSIS
 

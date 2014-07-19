@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::PubComp;
-$Net::MQTT::Message::PubComp::VERSION = '1.141990';
+$Net::MQTT::Message::PubComp::VERSION = '1.142000';
 # ABSTRACT: Perl module to represent an MQTT PubComp message
 
 
@@ -27,7 +27,7 @@ Net::MQTT::Message::PubComp - Perl module to represent an MQTT PubComp message
 
 =head1 VERSION
 
-version 1.141990
+version 1.142000
 
 =head1 SYNOPSIS
 
