@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix to will message handling.
 
 1.130190  2013-01-19 09:23:43 Europe/London
     - Remove unintended files from distribution.
