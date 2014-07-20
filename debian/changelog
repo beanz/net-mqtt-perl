@@ -1,8 +1,9 @@
-libnet-mqtt-perl (1.142000-1) unstable; urgency=low
+libnet-mqtt-perl (1.142001-1) unstable; urgency=low
 
   * New upstream release.
 
- -- Mark Hindess (Debian Packages) <soft-debian@temporalanomaly.com>  Sat, 19 Jul 2014 08:25:34 +0100
+ -- Mark Hindess (Debian Packages) <soft-debian@temporalanomaly.com>  Sat, 19 Jul 2014 12:41:51 +0100
+
 
 libnet-mqtt-perl (1.130190-1) unstable; urgency=low
 
