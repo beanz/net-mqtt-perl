@@ -1,6 +1,7 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix bad PAUSE upload.
 
 1.142001  2014-07-19 12:41:51+01:00 Europe/London
     - Fix bad packaging.
