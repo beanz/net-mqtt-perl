@@ -7,6 +7,7 @@ MANIFEST.SKIP
 META.json
 META.yml
 Makefile.PL
+Net-MQTT-1.142001/.travis.yml
 README
 bin/net-mqtt-pub
 bin/net-mqtt-sub
