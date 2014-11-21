@@ -5,9 +5,9 @@ author:
 build_requires:
   Test::More: '0'
 configure_requires:
-  ExtUtils::MakeMaker: '6.30'
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520'
+generated_by: 'Dist::Zilla version 5.025, CPAN::Meta::Converter version 2.143240'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -28,4 +28,4 @@ resources:
   bugtracker: https://github.com/beanz/net-mqtt-perl/issues
   homepage: http://search.cpan.org/dist/Net-MQTT/
   repository: git://github.com/beanz/net-mqtt-perl.git
-version: '1.142010'
+version: '1.143250'

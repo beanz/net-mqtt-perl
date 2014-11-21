@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::Connect;
-$Net::MQTT::Message::Connect::VERSION = '1.142010';
+$Net::MQTT::Message::Connect::VERSION = '1.143250';
 # ABSTRACT: Perl module to represent an MQTT Connect message
 
 
@@ -55,7 +55,7 @@ sub connect_reserved_flag { shift->{connect_reserved_flag} || 0 }
 sub keep_alive_timer { shift->{keep_alive_timer} || 60 }
 
 
-sub client_id { shift->{client_id} || 'Net::MQTT::Message['.$$.']' }
+sub client_id { shift->{client_id} || 'NetMQTTpm'.$$ }
 
 
 sub will_topic { shift->{will_topic} }
@@ -142,7 +142,7 @@ Net::MQTT::Message::Connect - Perl module to represent an MQTT Connect message
 
 =head1 VERSION
 
-version 1.142010
+version 1.143250
 
 =head1 SYNOPSIS
 
@@ -209,8 +209,7 @@ units are seconds.  The default is 60.
 =head2 C<client_id()>
 
 Returns the client identifier field of the MQTT Connect message.  The
-default is 'C<Net::MQTT::Message[$$]>' where 'C<$$>' is the
-current process id.
+default is 'C<NetMQTTpm$$]>' where 'C<$$>' is the current process id.
 
 =head2 C<will_topic()>
 
