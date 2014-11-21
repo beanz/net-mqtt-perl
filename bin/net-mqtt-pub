@@ -33,6 +33,11 @@ The host running the MQTT service.  The default is C<127.0.0.1>.
 
 The port of the running MQTT service.  The default is 1883.
 
+=item B<-client-id>
+
+The client id to use in the connect message.  The default is
+'NetMQTTpm' followed by the process id of the process.
+
 =item B<-verbose>
 
 Include more verbose output.  Without this option the script only
@@ -72,6 +77,7 @@ my $host = '127.0.0.1';
 my $port = 1883;
 my $keep_alive_timer = 120;
 my $retain;
+my $client_id;
 GetOptions('help|?' => \$help,
            'man' => \$man,
            'verbose+' => \$verbose,
@@ -79,6 +85,7 @@ GetOptions('help|?' => \$help,
            'port=i' => \$port,
            'keepalive=i' => \$keep_alive_timer,
            'retain' => \$retain,
+           'client_id|client-id|C=s' => \$client_id,
           ) or pod2usage(2);
 pod2usage(1) if ($help);
 pod2usage(-exitstatus => 0, -verbose => 2) if $man;
@@ -94,8 +101,10 @@ my $sock_buf = '';
 my $mid = 1;
 my $next_ping;
 my $got_ping_response = 1;
-send_message($socket, message_type => MQTT_CONNECT,
-             keep_alive_timer => $keep_alive_timer);
+my @connect = ( message_type => MQTT_CONNECT,
+                keep_alive_timer => $keep_alive_timer );
+push @connect, client_id => $client_id if (defined $client_id);
+send_message($socket, @connect);
 my $msg = read_message($socket, $sock_buf) or die "No ConnAck\n";
 print 'Received: ', $msg->string, "\n" if ($verbose >= 2);
 

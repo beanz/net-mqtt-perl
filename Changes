@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Fix default client id to meet spec. 1-23 characters from A-Za-z0-9.
+      Thanks to Richard Postlethwaite for the bug report.
 
 1.142010  2014-07-20 13:33:15+01:00 Europe/London
     - Fix bad PAUSE upload.

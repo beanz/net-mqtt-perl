@@ -128,12 +128,11 @@ sub keep_alive_timer { shift->{keep_alive_timer} || 60 }
 =method C<client_id()>
 
 Returns the client identifier field of the MQTT Connect message.  The
-default is 'C<Net::MQTT::Message[$$]>' where 'C<$$>' is the
-current process id.
+default is 'C<NetMQTTpm$$]>' where 'C<$$>' is the current process id.
 
 =cut
 
-sub client_id { shift->{client_id} || 'Net::MQTT::Message['.$$.']' }
+sub client_id { shift->{client_id} || 'NetMQTTpm'.$$ }
 
 =method C<will_topic()>
 
