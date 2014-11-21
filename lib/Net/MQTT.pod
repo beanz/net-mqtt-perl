@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT;
-$Net::MQTT::VERSION = '1.142010';
+$Net::MQTT::VERSION = '1.143250';
 # ABSTRACT: Perl modules for MQTT Protocol (http://mqtt.org/)
 
 
@@ -19,7 +19,7 @@ Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)
 
 =head1 VERSION
 
-version 1.142010
+version 1.143250
 
 =head1 SYNOPSIS
 

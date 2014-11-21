@@ -6,7 +6,7 @@ use warnings;
 use strict;
 $|=1;
 
-use Test::More tests => 15;
+use Test::More tests => 16;
 BEGIN { use_ok('Net::MQTT::Constants'); }
 use_ok('Net::MQTT::Message');
 
@@ -53,4 +53,5 @@ is((unpack 'H*', $mqtt->bytes), q{008101}.('58'x129), '... bytes');
 
 $mqtt = Net::MQTT::Message->new(message_type => 1);
 ok($mqtt, 'new - connect message');
-is($mqtt->client_id, 'Net::MQTT::Message['.$$.']', '... client_id');
+is($mqtt->client_id, 'NetMQTTpm'.$$, '... client_id');
+ok($mqtt->client_id =~ /^[A-Za-z0-9]{1,23}$/, '... client_id in spec');
