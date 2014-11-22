@@ -47,7 +47,12 @@
          }
       },
       "test" : {
+         "recommends" : {
+            "CPAN::Meta" : "2.120900"
+         },
          "requires" : {
+            "ExtUtils::MakeMaker" : "0",
+            "File::Spec" : "0",
             "Test::More" : "0"
          }
       }

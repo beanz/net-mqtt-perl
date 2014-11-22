@@ -36,6 +36,8 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "ExtUtils::MakeMaker" => 0,
+    "File::Spec" => 0,
     "Test::More" => 0
   },
   "VERSION" => "1.143260",
@@ -48,6 +50,7 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "Carp" => 0,
   "ExtUtils::MakeMaker" => 0,
+  "File::Spec" => 0,
   "Getopt::Long" => 0,
   "IO::Select" => 0,
   "IO::Socket::INET" => 0,
