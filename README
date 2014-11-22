@@ -2,7 +2,7 @@ NAME
     Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)
 
 VERSION
-    version 1.143250
+    version 1.143260
 
 SYNOPSIS
       # net-mqtt-sub /topic
