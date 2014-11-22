@@ -47,7 +47,12 @@
          }
       },
       "test" : {
+         "recommends" : {
+            "CPAN::Meta" : "2.120900"
+         },
          "requires" : {
+            "ExtUtils::MakeMaker" : "0",
+            "File::Spec" : "0",
             "Test::More" : "0"
          }
       }
@@ -64,6 +69,6 @@
          "web" : "https://github.com/beanz/net-mqtt-perl"
       }
    },
-   "version" : "1.143250"
+   "version" : "1.143260"
 }
 

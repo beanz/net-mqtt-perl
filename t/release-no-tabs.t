@@ -37,6 +37,8 @@ my @files = (
     'lib/Net/MQTT/Message/UnsubAck.pm',
     'lib/Net/MQTT/Message/Unsubscribe.pm',
     'lib/Net/MQTT/TopicStore.pm',
+    't/00-report-prereqs.dd',
+    't/00-report-prereqs.t',
     't/01-message.t',
     't/01-topic.t',
     't/02-messages.t',

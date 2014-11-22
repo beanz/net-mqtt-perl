@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::SubAck;
-$Net::MQTT::Message::SubAck::VERSION = '1.143250';
+$Net::MQTT::Message::SubAck::VERSION = '1.143260';
 # ABSTRACT: Perl module to represent an MQTT SubAck message
 
 
@@ -59,7 +59,7 @@ Net::MQTT::Message::SubAck - Perl module to represent an MQTT SubAck message
 
 =head1 VERSION
 
-version 1.143250
+version 1.143260
 
 =head1 SYNOPSIS
 
