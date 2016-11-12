@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Net::MQTT::Message::UnsubAck;
-$Net::MQTT::Message::UnsubAck::VERSION = '1.143260';
+$Net::MQTT::Message::UnsubAck::VERSION = '1.163170';
 # ABSTRACT: Perl module to represent an MQTT UnsubAck message
 
 
@@ -27,7 +27,7 @@ Net::MQTT::Message::UnsubAck - Perl module to represent an MQTT UnsubAck message
 
 =head1 VERSION
 
-version 1.143260
+version 1.163170
 
 =head1 SYNOPSIS
 

@@ -23,12 +23,16 @@ my $port = 1883;
 my $count;
 my $client_id;
 my $keep_alive_timer = 120;
+my $user_name;
+my $password;
 GetOptions('help|?' => \$help,
            'man' => \$man,
            'verbose+' => \$verbose,
            'host=s' => \$host,
            'port=i' => \$port,
            'count=i' => \$count,
+           'username=s' => \$user_name,
+           'password=s' => \$password,
            'one|1' => sub { $count = 1 },
            'client_id|client-id|C=s' => \$client_id,
            'keepalive=i' => \$keep_alive_timer) or pod2usage(2);
@@ -46,7 +50,9 @@ my $mid = 1;
 my $next_ping;
 my $got_ping_response = 1;
 my @connect = ( message_type => MQTT_CONNECT,
-                keep_alive_timer => $keep_alive_timer );
+                keep_alive_timer => $keep_alive_timer,
+                user_name => $user_name,
+                password => $password );
 push @connect, client_id => $client_id if (defined $client_id);
 send_message($socket, @connect);
 my $msg = read_message($socket, $buf) or die "No ConnAck\n";
@@ -123,7 +129,7 @@ net-mqtt-sub - Perl script for subscribing to an MQTT topic
 
 =head1 VERSION
 
-version 1.143260
+version 1.163170
 
 =head1 SYNOPSIS
 
@@ -189,6 +195,14 @@ is 0 - read forever.
 =item B<-one> or B<-1>
 
 Short for B<-count 1>.  Read one message and exit.
+
+=item B<-username>
+
+Username to be used for authentication in the connection message.
+
+=item B<-password>
+
+Password to be used for authentication in the connection message.
 
 =back
 

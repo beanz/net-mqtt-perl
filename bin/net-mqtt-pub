@@ -139,7 +139,7 @@ net-mqtt-pub - Perl script for publishing to an MQTT topic
 
 =head1 VERSION
 
-version 1.143260
+version 1.163170
 
 =head1 SYNOPSIS
 

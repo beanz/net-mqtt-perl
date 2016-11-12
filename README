@@ -1,36 +1,25 @@
-NAME
-    Net::MQTT - Perl modules for MQTT Protocol (http://mqtt.org/)
-
-VERSION
-    version 1.143260
-
 SYNOPSIS
+
       # net-mqtt-sub /topic
-
+    
       # net-mqtt-pub /topic message
-
+    
       # net-mqtt-trace mqtt.tcp
 
 DESCRIPTION
-    Low level API for the MQTT protocol described at <http://mqtt.org>.
+
+    Low level API for the MQTT protocol described at http://mqtt.org.
 
     IMPORTANT: This is an early release and the API is still subject to
     change.
 
 DISCLAIMER
-    This is not official IBM code. I work for IBM but I'm writing this in my
-    spare time (with permission) for fun.
+
+    This is not official IBM code. I work for IBM but I'm writing this in
+    my spare time (with permission) for fun.
 
 SEE ALSO
+
     net-mqtt-sub(1), net-mqtt-pub(1), net-mqtt-trace(1),
     Net::MQTT::Message(3)
-
-AUTHOR
-    Mark Hindess <soft-cpan@temporalanomaly.com>
-
-COPYRIGHT AND LICENSE
-    This software is copyright (c) 2014 by Mark Hindess.
-
-    This is free software; you can redistribute it and/or modify it under
-    the same terms as the Perl 5 programming language system itself.
 
