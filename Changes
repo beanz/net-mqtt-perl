@@ -1,6 +1,8 @@
 Revision history for Perl extension Net::MQTT.
 
 {{$NEXT}}
+    - Add username and password options to net-mqtt-sub. Thanks to @hollie.
+    - Fix author tests.
 
 1.143260  2014-11-22 18:57:01+00:00 Europe/London
     - Fix authordeps.
