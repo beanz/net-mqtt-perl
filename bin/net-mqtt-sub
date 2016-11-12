@@ -127,8 +127,8 @@ my $next_ping;
 my $got_ping_response = 1;
 my @connect = ( message_type => MQTT_CONNECT,
                 keep_alive_timer => $keep_alive_timer,
-		user_name => $user_name,
-		password => $password );
+                user_name => $user_name,
+                password => $password );
 push @connect, client_id => $client_id if (defined $client_id);
 send_message($socket, @connect);
 my $msg = read_message($socket, $buf) or die "No ConnAck\n";
